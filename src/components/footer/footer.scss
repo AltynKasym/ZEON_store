@@ -13,14 +13,14 @@
   &__top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     &-logo {
       padding: 52px 100px 36px 0;
     }
 
     &-nav {
-      display: flex;
+      // display: flex;
       //   justify-content: space-between;
     }
 
@@ -42,6 +42,47 @@
       font-size: 14px;
       line-height: 17px;
       padding-bottom: 12px;
+    }
+
+    &-contacts {
+      li {
+        padding-left: 7px;
+      }
+
+      li::before {
+        position: relative;
+        top: 4px;
+        right: 7px;
+        content: url("../img/footer/phone.svg");
+      }
+      li:nth-child(3):before {
+        position: relative;
+        top: 2px;
+        right: 7px;
+        content: url("../img/footer/mail.svg");
+      }
+    }
+
+    &-social {
+      li {
+        padding-left: 7px;
+
+        &::before {
+          position: relative;
+          top: 4px;
+          right: 7px;
+        }
+
+        &:nth-child(1):before {
+          content: url("../img/footer/instagram.svg");
+        }
+        &:nth-child(2):before {
+          content: url("../img/footer/telegram.svg");
+        }
+        &:nth-child(3):before {
+          content: url("../img/footer/whatsapp.svg");
+        }
+      }
     }
   }
 
