@@ -1,8 +1,15 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
+import { AboutUs, Footer, Header } from "./components/Components";
 
 function App() {
-  return <div className="App">Zeon Store</div>;
+  return (
+    <div className="App">
+      <Header />
+      <AboutUs />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

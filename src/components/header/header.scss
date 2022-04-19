@@ -1,0 +1,94 @@
+@import "../var";
+
+.header {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 21px;
+
+  &__top {
+    padding: 22px 0;
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-menu {
+      padding: 0;
+      display: flex;
+      li {
+        list-style: none;
+      }
+      li + li {
+        padding-left: 24px;
+      }
+    }
+
+    &-phone {
+      span {
+        color: #979797;
+      }
+      a {
+        padding-left: 6px;
+        text-decoration: none;
+        color: $primary-text;
+      }
+    }
+  }
+
+  &__bottom {
+    border: 1px solid #eeeeee;
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-logo {
+      margin: 9px 0px;
+      width: 162px;
+      height: 70px;
+    }
+
+    &-search {
+      input {
+        width: 662px;
+        height: 44px;
+        padding-left: 20px;
+        background: #f8f8f8;
+        border: 1px solid #e0e0e0;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      &-icon {
+        font-family: "Material Icons";
+        font-size: 50px;
+        position: relative;
+        left: -35px;
+        top: 7px;
+      }
+    }
+
+    &-favorites {
+      display: flex;
+      align-items: center;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $primary-text;
+
+      span {
+        padding-left: 10px;
+      }
+    }
+  }
+}
