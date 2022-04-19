@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ZEON_store/static/css/main.41a7049b.css",
+    "main.js": "/ZEON_store/static/js/main.58e9f798.js",
+    "static/js/787.0ac5ae94.chunk.js": "/ZEON_store/static/js/787.0ac5ae94.chunk.js",
+    "static/media/help.png": "/ZEON_store/static/media/help.a975eeae39b00b448aed.png",
+    "static/media/about-us2.png": "/ZEON_store/static/media/about-us2.be395ae829acbfd6c4f2.png",
+    "static/media/about-us3.png": "/ZEON_store/static/media/about-us3.c842d9f8d2fb0a42b1b3.png",
+    "static/media/about-us1.png": "/ZEON_store/static/media/about-us1.bc1f046cba6a80ff4b3d.png",
+    "static/media/mail.svg": "/ZEON_store/static/media/mail.e8c1392f0a0ed1f810af.svg",
+    "static/media/logo.svg": "/ZEON_store/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/whatsapp.svg": "/ZEON_store/static/media/whatsapp.166be0fc381f5462d6fb.svg",
+    "static/media/phone.svg": "/ZEON_store/static/media/phone.9fb36cfbeedd122b57b4.svg",
+    "static/media/instagram.svg": "/ZEON_store/static/media/instagram.4a3f7ae3932c47ede921.svg",
+    "static/media/telegram.svg": "/ZEON_store/static/media/telegram.846289a7751827a399c4.svg",
+    "index.html": "/ZEON_store/index.html",
+    "main.41a7049b.css.map": "/ZEON_store/static/css/main.41a7049b.css.map",
+    "main.58e9f798.js.map": "/ZEON_store/static/js/main.58e9f798.js.map",
+    "787.0ac5ae94.chunk.js.map": "/ZEON_store/static/js/787.0ac5ae94.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.41a7049b.css",
+    "static/js/main.58e9f798.js"
+  ]
+}
