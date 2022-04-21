@@ -4,36 +4,32 @@
   text-align: left;
   background-color: $footer-bgc;
   color: $footer-txt;
-
-  &__inner {
-    // display: flex;
-    // flex-direction: row;
-  }
+  width: 100%;
 
   &__top {
     display: flex;
-    align-items: center;
-    // justify-content: space-between;
+    flex-direction: row;
 
     &-logo {
       padding: 52px 100px 36px 0;
     }
 
     &-nav {
-      // display: flex;
-      //   justify-content: space-between;
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
     }
 
-    &-section + &-section {
-      margin-left: 148px;
+    &-section {
+      display: flex;
+      flex-direction: column;
     }
+
     .section-title {
       font-weight: 600;
       font-size: 16px;
       line-height: 20px;
       color: $footer-title;
-      //   margin-bottom: 16px;
-      //   margin-right: 148px;
       margin: 48px 0 16px 0;
     }
 
@@ -106,5 +102,83 @@
   a {
     text-decoration: none;
     color: $footer-txt;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    // &__inner {
+    //   display: flex;
+    //   flex-direction: column;
+    // }
+
+    &__top {
+      display: flex;
+      flex-direction: column;
+
+      &-nav {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      &-section {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    &__top {
+      display: flex;
+      flex-direction: column;
+
+      &-logo {
+        padding: 24px 0;
+      }
+
+      &-nav {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      &-section {
+        padding-right: 50px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .section-title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $footer-title;
+        margin: 24px 0 16px 0;
+      }
+
+      li {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+      }
+
+      &-section + &-section {
+      }
+    }
+
+    &__bottom {
+      font-size: 12px;
+      line-height: 15px;
+      width: 99%;
+      margin-top: 26px;
+      padding: 20px 0;
+      border-top: 1px solid #363635;
+    }
   }
 }

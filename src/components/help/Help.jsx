@@ -1,29 +1,53 @@
 import React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { default as help } from "../img/help/help.png";
 import "./help.scss";
-import database from "../Database";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { app } from "../Database";
+import { getDatabase, ref, child, get, set } from "firebase/database";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 function Help() {
-  let helpInfo;
-  const dbRef = ref(database);
-  get(child(dbRef, `help`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        helpInfo = snapshot.val();
-        console.log(helpInfo);
-      } else {
-        console.log("No data available");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  const [data, setData] = useState({});
+  const database = getDatabase(app);
+
+  useEffect(() => {
+    get(child(ref(database), `help`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setData({ ...snapshot.val() });
+        } else {
+          setData({});
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+  }, []);
+
+  // Запись в firebase
+
+  // function writeData(userId, question, answer) {
+  //   const db = getDatabase();
+  //   set(ref(db, "help/" + userId), {
+  //     question: question,
+  //     answer: answer,
+  //   });
+  // }
+
+  // writeData(
+  //   "6",
+  //   "Как я могу оставить заявку на обратную связь?",
+  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet laoreet a, neque, gravida urna libero iaculis lacus. Pellentesque pellentesque massa ornare sit pellentesque elit nulla. Id est tellus maecenas ornare velit. Ut cras ut rhoncus fermentum pharetra a sit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet laoreet a, neque, gravida urna libero iaculis lacus. Pellentesque pellentesque massa ornare sit pellentesque elit nulla. Id est tellus maecenas ornare velit. "
+  // );
+
   return (
     <div className="help">
       <div className="container">
@@ -32,38 +56,23 @@ function Help() {
             <img src={help} alt="Помощь" />
           </div>
           <div className="help__inner-info">
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Accordion 1</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography>Accordion 2</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
+            {Object.keys(data).map((id, index) => {
+              return (
+                <Accordion className="help__inner-accordion" key={id + index}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    className="help__inner-accordion-title"
+                  >
+                    <Typography>{data[id].question}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails className="help__inner-accordion-text">
+                    <Typography>{data[id].answer}</Typography>
+                  </AccordionDetails>
+                </Accordion>
+              );
+            })}
           </div>
         </div>
       </div>

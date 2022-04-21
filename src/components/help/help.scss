@@ -1,10 +1,22 @@
 @import "../var";
 
 .help {
+  background-color: $main-bgc;
   &__inner {
     display: flex;
-
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0 20px;
     &-info {
+      display: flex;
+      flex-direction: column;
+      width: 65%;
+    }
+
+    &-accordion {
+      border: none;
+      box-shadow: none;
+      margin: 10px 0 10px 20px;
     }
   }
 }

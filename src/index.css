@@ -13,6 +13,7 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: left;
 }
 
 code {
@@ -21,6 +22,7 @@ code {
 }
 
 .container {
-  width: 1168px;
+  padding: 0 20px;
+  max-width: 1208px;
   margin: 0 auto;
 }
