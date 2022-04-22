@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ZEON_store/static/css/main.e7a3a031.css",
-    "main.js": "/ZEON_store/static/js/main.e91edeaf.js",
-    "static/js/787.0ac5ae94.chunk.js": "/ZEON_store/static/js/787.0ac5ae94.chunk.js",
-    "static/media/help.png": "/ZEON_store/static/media/help.a975eeae39b00b448aed.png",
-    "static/media/mail.svg": "/ZEON_store/static/media/mail.e8c1392f0a0ed1f810af.svg",
-    "static/media/logo.svg": "/ZEON_store/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "static/media/whatsapp.svg": "/ZEON_store/static/media/whatsapp.166be0fc381f5462d6fb.svg",
-    "static/media/phone.svg": "/ZEON_store/static/media/phone.9fb36cfbeedd122b57b4.svg",
-    "static/media/instagram.svg": "/ZEON_store/static/media/instagram.4a3f7ae3932c47ede921.svg",
-    "static/media/telegram.svg": "/ZEON_store/static/media/telegram.846289a7751827a399c4.svg",
-    "index.html": "/ZEON_store/index.html",
-    "main.e7a3a031.css.map": "/ZEON_store/static/css/main.e7a3a031.css.map",
-    "main.e91edeaf.js.map": "/ZEON_store/static/js/main.e91edeaf.js.map",
-    "787.0ac5ae94.chunk.js.map": "/ZEON_store/static/js/787.0ac5ae94.chunk.js.map"
+    "main.css": "/zeon_store/static/css/main.2ab476ee.css",
+    "main.js": "/zeon_store/static/js/main.2fa993e5.js",
+    "static/js/787.0ac5ae94.chunk.js": "/zeon_store/static/js/787.0ac5ae94.chunk.js",
+    "static/media/help.png": "/zeon_store/static/media/help.a975eeae39b00b448aed.png",
+    "static/media/mail.svg": "/zeon_store/static/media/mail.e8c1392f0a0ed1f810af.svg",
+    "static/media/logo.svg": "/zeon_store/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/whatsapp.svg": "/zeon_store/static/media/whatsapp.166be0fc381f5462d6fb.svg",
+    "static/media/phone.svg": "/zeon_store/static/media/phone.9fb36cfbeedd122b57b4.svg",
+    "static/media/instagram.svg": "/zeon_store/static/media/instagram.4a3f7ae3932c47ede921.svg",
+    "static/media/telegram.svg": "/zeon_store/static/media/telegram.846289a7751827a399c4.svg",
+    "index.html": "/zeon_store/index.html",
+    "main.2ab476ee.css.map": "/zeon_store/static/css/main.2ab476ee.css.map",
+    "main.2fa993e5.js.map": "/zeon_store/static/js/main.2fa993e5.js.map",
+    "787.0ac5ae94.chunk.js.map": "/zeon_store/static/js/787.0ac5ae94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e7a3a031.css",
-    "static/js/main.e91edeaf.js"
+    "static/css/main.2ab476ee.css",
+    "static/js/main.2fa993e5.js"
   ]
 }
