@@ -10,23 +10,41 @@ import { app } from "../Database";
 import { getDatabase, child, get, ref, set } from "firebase/database";
 import { useState, useEffect } from "react";
 // import { getApp } from "firebase/app";
-import { getStorage, ref as sRef, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
 
 function Header() {
-  const [data, setData] = useState({});
   const database = getDatabase(app);
   const st = getStorage();
 
-  useEffect(() => {
-    getDownloadURL(sRef(st, "about_us/"))
-      .then((url) => {
-        console.log(url);
-        const img = document.querySelector(".header__bottom-logo");
-        img.setAttribute("src", url);
-        img.setAttribute("alt", "123");
+  const [image, setImage] = useState([]);
+  const storage = getStorage();
+
+  const listImage = () => {
+    listAll(sRef(storage, "zeon/"))
+      .then((res) => {
+        res.items.forEach((itemref) => {
+          getDownloadURL(itemref)
+            .then((url) => {
+              setImage((image) => [...image, url]);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
       })
-      .catch((error) => {});
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    listImage();
   }, []);
+
+  const [data, setData] = useState({});
 
   useEffect(() => {
     get(child(ref(database), `phone`))
@@ -40,20 +58,21 @@ function Header() {
       .catch((error) => {
         console.error(error);
       });
-
-    return () => {
-      setData({});
-    };
   }, []);
 
-  // function writeData(id, phone) {
+  // function writeData(id, title, text) {
   //   const db = getDatabase();
-  //   set(ref(db, "phone/" + id), {
-  //     phone: phone,
+  //   set(ref(db, "about_us/" + id), {
+  //     title: title,
+  //     text: text,
   //   });
   // }
 
-  // writeData("1", "+996555123456");
+  // writeData(
+  //   1,
+  //   "О Нас",
+  //   "У нас Вы найдёте всё, что Вам так нужно. Ассортимент магазина постоянно расширяется и дополняется в зависимости от пожеланий клиентов. Женская одежда из наших коллекций – это комфортная, стильная и качественная одежда не только на каждый день, но и для любых ситуаций по доступным ценам.Натуральные материалы, продуманные силуэты, современный дизайн и возможность легкого сочетания моделей помогут Вам всегда оставаться в центре внимания и чувствовать себя уместно в любой ситуации.Если Вы любите одеваться ярко, модно и оригинально, у нас Вы найдете все необходимое, чтобы всегда быть в центре внимания. У нас большая коллекция для любого торжества и праздника, которая сможет удовлетворить вкус самой взыскательной модницы! А для деловых ситуаций, в которых Вам непременно нужно выглядеть элегантно и стильно, мы предлагаем Вам одежду из коллекции 'деловой стиль и офис'. Мода постоянно диктует нам свои требования и для современной девушки, желающей идти в ногу со временем, важно иметь возможность постоянно пополнять свой гардероб стильной одеждой."
+  // );
 
   return (
     <header className="header">
@@ -75,11 +94,13 @@ function Header() {
             <div className="header__top-phone">
               <span>Тел:</span>
 
-              {Object.keys(data)
-                .sort()
-                .map((id, index) => {
-                  return <a href={`tel:{data[id].phone}`}>{data[id].phone}</a>;
-                })}
+              {Object.keys(data).map((id, index) => {
+                return (
+                  <a key={id + index} href={`tel:${data[id].phone}`}>
+                    {data[id].phone}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -90,7 +111,9 @@ function Header() {
             {/* <div className="header__bottom-logo"> */}
             <Link to="/zeon_store">
               {" "}
-              <img className="header__bottom-logo" />
+              {image.map((item, name) => (
+                <img className="header__bottom-logo" src={item} alt={name} />
+              ))}
             </Link>
             {/* </div> */}
             <div className="header__bottom-search">
