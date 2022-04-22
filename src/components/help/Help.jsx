@@ -85,6 +85,7 @@ function Help() {
             ))}
           </div>
           <div className="help__inner-info">
+            <h2 className="help__inner-title">Помощь</h2>
             {Object.keys(data).map((id, index) => {
               return (
                 <Accordion className="help__inner-accordion" key={id + index}>
@@ -92,9 +93,10 @@ function Help() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    className="help__inner-accordion-title"
                   >
-                    <Typography>{data[id].question}</Typography>
+                    <Typography className="help__inner-accordion-title">
+                      {data[id].question}
+                    </Typography>
                   </AccordionSummary>
                   <AccordionDetails className="help__inner-accordion-text">
                     <Typography>{data[id].answer}</Typography>

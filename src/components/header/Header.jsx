@@ -109,7 +109,7 @@ function Header() {
         <div className="container">
           <div className="header__bottom-inner">
             {/* <div className="header__bottom-logo"> */}
-            <Link to="/zeon_store">
+            <a href="/zeon_store">
               {" "}
               {image.map((item, name) => (
                 <img
@@ -119,7 +119,7 @@ function Header() {
                   key="item+id"
                 />
               ))}
-            </Link>
+            </a>
             {/* </div> */}
             <div className="header__bottom-search">
               <input type="text" placeholder="Поиск" />
