@@ -112,7 +112,12 @@ function Header() {
             <Link to="/zeon_store">
               {" "}
               {image.map((item, name) => (
-                <img className="header__bottom-logo" src={item} alt={name} />
+                <img
+                  className="header__bottom-logo"
+                  src={item}
+                  alt={name}
+                  key="item+id"
+                />
               ))}
             </Link>
             {/* </div> */}

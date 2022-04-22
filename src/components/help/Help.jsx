@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -10,10 +10,38 @@ import { default as help } from "../img/help/help.png";
 import "./help.scss";
 import { app } from "../Database";
 import { getDatabase, ref, child, get, set } from "firebase/database";
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  list,
+  listAll,
+} from "firebase/storage";
 
 function Help() {
+  const [image, setImage] = useState([]);
+  const storage = getStorage();
+
+  const listImage = () => {
+    listAll(sRef(storage, "help/"))
+      .then((res) => {
+        res.items.forEach((itemref) => {
+          getDownloadURL(itemref)
+            .then((url) => {
+              setImage((image) => [...image, url]);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    listImage();
+  }, []);
+
   const [data, setData] = useState({});
   const database = getDatabase(app);
 
@@ -29,7 +57,6 @@ function Help() {
       .catch((error) => {
         console.error(error);
       });
-
   }, []);
 
   // Запись в firebase
@@ -53,7 +80,9 @@ function Help() {
       <div className="container">
         <div className="help__inner">
           <div className="help__inner-media">
-            <img src={help} alt="Помощь" />
+            {image.map((item, id) => (
+              <img key="item+id" src={item} alt="Помощь" />
+            ))}
           </div>
           <div className="help__inner-info">
             {Object.keys(data).map((id, index) => {

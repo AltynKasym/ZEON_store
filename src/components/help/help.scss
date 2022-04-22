@@ -17,6 +17,14 @@
       border: none;
       box-shadow: none;
       margin: 10px 0 10px 20px;
+
+      &-text {
+        text-align: left;
+      }
+
+      // .TYPOGRAPHY {
+      //   padding: 50px;
+      // }
     }
   }
 }

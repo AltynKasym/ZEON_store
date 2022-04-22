@@ -40,18 +40,6 @@ function Footer() {
       });
   }, []);
 
-  // Запись в firebase
-
-  // function writeData(Id, name, links) {
-  //   const db = getDatabase();
-  //   set(ref(db, "footer/social_links/" + Id), {
-  //     name: name,
-  //     links: links,
-  //   });
-  // }
-
-  // writeData("3", "Whatsapp", "https://whatsapp.com");
-
   return (
     <div className="footer">
       <div className="container">
@@ -82,9 +70,15 @@ function Footer() {
                 {Object.keys(contact).map((id, index) => {
                   return (
                     <li key={id + index}>
-                      <a href={`tel:${contact[id].phone}`}>
-                        {contact[id].phone}
-                      </a>
+                      {contact[id].phone.includes("@") ? (
+                        <a href={`mailto:${contact[id].phone}`}>
+                          {contact[id].phone}
+                        </a>
+                      ) : (
+                        <a href={`tel:${contact[id].phone}`}>
+                          {contact[id].phone}
+                        </a>
+                      )}
                     </li>
                   );
                 })}
