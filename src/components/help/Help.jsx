@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { default as help } from "../img/help/help.png";
 import "./help.scss";
 import { app } from "../Database";
 import { getDatabase, ref, child, get, set } from "firebase/database";
@@ -46,7 +45,7 @@ function Help() {
   const database = getDatabase(app);
 
   useEffect(() => {
-    get(child(ref(database), `help`))
+    get(child(ref(database), `help/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setData({ ...snapshot.val() });
@@ -58,22 +57,6 @@ function Help() {
         console.error(error);
       });
   }, []);
-
-  // Запись в firebase
-
-  // function writeData(userId, question, answer) {
-  //   const db = getDatabase();
-  //   set(ref(db, "help/" + userId), {
-  //     question: question,
-  //     answer: answer,
-  //   });
-  // }
-
-  // writeData(
-  //   "6",
-  //   "Как я могу оставить заявку на обратную связь?",
-  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet laoreet a, neque, gravida urna libero iaculis lacus. Pellentesque pellentesque massa ornare sit pellentesque elit nulla. Id est tellus maecenas ornare velit. Ut cras ut rhoncus fermentum pharetra a sit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet laoreet a, neque, gravida urna libero iaculis lacus. Pellentesque pellentesque massa ornare sit pellentesque elit nulla. Id est tellus maecenas ornare velit. "
-  // );
 
   return (
     <div className="help">
