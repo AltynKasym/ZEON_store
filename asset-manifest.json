@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/zeon_store/static/css/main.1e8514b4.css",
-    "main.js": "/zeon_store/static/js/main.fdbdab23.js",
+    "main.css": "/zeon_store/static/css/main.15dca8e3.css",
+    "main.js": "/zeon_store/static/js/main.08f91a16.js",
     "static/js/787.0ac5ae94.chunk.js": "/zeon_store/static/js/787.0ac5ae94.chunk.js",
     "static/media/mail.svg": "/zeon_store/static/media/mail.e8c1392f0a0ed1f810af.svg",
     "static/media/logo.svg": "/zeon_store/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
@@ -10,12 +10,12 @@
     "static/media/instagram.svg": "/zeon_store/static/media/instagram.4a3f7ae3932c47ede921.svg",
     "static/media/telegram.svg": "/zeon_store/static/media/telegram.846289a7751827a399c4.svg",
     "index.html": "/zeon_store/index.html",
-    "main.1e8514b4.css.map": "/zeon_store/static/css/main.1e8514b4.css.map",
-    "main.fdbdab23.js.map": "/zeon_store/static/js/main.fdbdab23.js.map",
+    "main.15dca8e3.css.map": "/zeon_store/static/css/main.15dca8e3.css.map",
+    "main.08f91a16.js.map": "/zeon_store/static/js/main.08f91a16.js.map",
     "787.0ac5ae94.chunk.js.map": "/zeon_store/static/js/787.0ac5ae94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e8514b4.css",
-    "static/js/main.fdbdab23.js"
+    "static/css/main.15dca8e3.css",
+    "static/js/main.08f91a16.js"
   ]
 }
