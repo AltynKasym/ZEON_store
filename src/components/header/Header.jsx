@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
-import { default as logo_header } from "../img/logo-header.png";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { app } from "../Database";
-// import storage from "../Database";
 import { getDatabase, child, get, ref, set } from "firebase/database";
-import { useState, useEffect } from "react";
-// import { getApp } from "firebase/app";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import {
   getStorage,
   ref as sRef,
@@ -19,7 +16,6 @@ import {
 
 function Header() {
   const database = getDatabase(app);
-  const st = getStorage();
 
   const [image, setImage] = useState([]);
   const storage = getStorage();
@@ -74,12 +70,46 @@ function Header() {
   //   "Sit ullamcorper at gravida quis feugiat. Laoreet leo dolor, dui eget sit viverra justo, malesuada. Viverra pharetra, augue neque felis enim dui id cum. At pellentesque diam nulla ac amet quisque quis. Est consectetur ullamcorper curabitur quis viverra hac molestie. Elit pulvinar congue ut amet adipiscing felis tincidunt. Amet quis varius aliquam hendrerit tempus. Sed sit diam quis scelerisque congu econgu econgu econguecongu econguecon guecon guecon guecong ueconguecong uec ongue.Sit ullamcorper at gravida quis feugiat. Laoreet leo dolor, dui eget sit viverra justo, malesuada. Viverra pharetra, augue neque  Sit ullamcorper at gravida quis feugiat. Laoreet leo dolor, dui eget sit viverra justo, malesuada. Viverra pharetra, augue neque felis enim dui id cum. At pellentesque diam nulla ac amet quisque quis. Est consectetur ullamcorper curabitur quis viverra hac molestie. Elit pulvinar congue ut amet adipiscing felis tincidunt. Amet quis varius aliquam hendrerit tempus. Sed sit diam quis. "
   // );
 
+  const [openSearch, setOpenSearch] = useState(false);
+  function searchSlider() {
+    setOpenSearch(!openSearch);
+  }
+
+  const [openMenu, setOpenMenu] = useState(false);
+  function menuSlider() {
+    setOpenMenu(!openMenu);
+  }
+
+  const inputHandler = (e) => {
+    console.log(e.target.value);
+  };
+
+  function searchInfo() {}
+
   return (
     <header className="header">
       <div className="header__top">
         <div className="container">
-          <div className="header__top-inner">
-            <ul className="header__top-menu">
+          <div
+            className="header__top-inner"
+            style={
+              window.screen.width <= 700
+                ? openMenu
+                  ? { display: "flex" }
+                  : { display: "none" }
+                : { display: "flex" }
+            }
+          >
+            <ul
+              className="header__top-menu"
+              style={
+                window.screen.width <= 700
+                  ? openMenu
+                    ? { display: "flex" }
+                    : { display: "none" }
+                  : { display: "flex" }
+              }
+            >
               <li>
                 <Link to="/about-us"> О нас</Link>
               </li>
@@ -104,11 +134,21 @@ function Header() {
             </div>
           </div>
         </div>
+        <div
+          className="header__mobile-search"
+          style={openSearch ? { display: "block" } : { display: "none" }}
+        >
+          Поиск
+        </div>
       </div>
       <div className="header__bottom">
         <div className="container">
           <div className="header__bottom-inner">
             {/* <div className="header__bottom-logo"> */}
+            <MenuRoundedIcon
+              className="header__bottom-menu "
+              onClick={window.screen.width <= 700 ? menuSlider : searchInfo}
+            ></MenuRoundedIcon>
             <a href="/zeon_store">
               {" "}
               {image.map((item, name) => (
@@ -122,20 +162,24 @@ function Header() {
             </a>
             {/* </div> */}
             <div className="header__bottom-search">
-              <input type="text" placeholder="Поиск" />
-              <SearchOutlinedIcon className="header__bottom-search-icon" />
+              <input type="text" placeholder="Поиск" onChange={inputHandler} />
+              <SearchOutlinedIcon
+                className="header__bottom-search-icon"
+                onClick={searchSlider}
+              />
             </div>
             <div className="header__bottom-favorites">
               <FavoriteBorderIcon />
               <span>Избранное</span>
             </div>
-            <div className="header__bottom-favorites">
+            <div className="header__bottom-favorites header__bottom-basket">
               <ShoppingBasketOutlinedIcon />
               <span>Корзина</span>
             </div>
           </div>
         </div>
       </div>
+
       <div className="header__breadcrumb"></div>
     </header>
   );

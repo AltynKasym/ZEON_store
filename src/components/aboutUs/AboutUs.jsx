@@ -57,16 +57,16 @@ function AboutUs() {
         <div className="about-us__inner">
           <div className="about-us__media">
             {image.map((item, name) => (
-              <img src={item} alt={name} />
+              <img src={item} alt={name} key={item + name} />
             ))}
           </div>
           <div className="about-us__info">
             {Object.keys(data).map((id, index) => {
               return (
-                <>
+                <div key={id + index}>
                   <h1 className="about-us__info-title">{data[id].title}</h1>
                   <p className="about-us__info-text">{data[id].text}</p>
-                </>
+                </div>
               );
             })}
           </div>
