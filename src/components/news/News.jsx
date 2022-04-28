@@ -4,9 +4,9 @@ import { app } from "../Database";
 import { getDatabase, ref, child, get } from "firebase/database";
 
 function News() {
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.scrollTop = 0;
-  });
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   document.body.scrollTop = 0;
+  // });
 
   const [data, setData] = useState({});
   const database = getDatabase(app);

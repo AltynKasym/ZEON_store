@@ -5,4 +5,6 @@ export { default as AboutUs } from "./aboutUs/AboutUs";
 export { default as Help } from "./help/Help";
 export { default as News } from "./news/News";
 export { default as Collection } from "./collection/Collection";
-export { default as LoadPhoto } from "./loadPhoto/LoadPhoto";
+export { default as CollectionPage } from "./collectionPage/CollectionPage";
+export { default as Offer } from "./offer/Offer";
+export { default as NotFound } from "./notFound/NotFound";

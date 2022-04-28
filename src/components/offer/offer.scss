@@ -1,0 +1,25 @@
+@import "../var";
+
+.offer {
+  background-color: $main-bgc;
+  &__title {
+    padding: 11px 0 18px 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    color: $primary-text;
+  }
+
+  &__text {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 165%;
+    color: #5b5b5b;
+    padding: 16px;
+    background-color: #fff;
+    padding-bottom: 40px;
+    // margin-bottom: 20px;
+  }
+}

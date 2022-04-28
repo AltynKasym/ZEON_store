@@ -3,14 +3,16 @@ import "./App.scss";
 import {
   AboutUs,
   Collection,
+  CollectionPage,
   Footer,
   Header,
   Help,
   Main,
   News,
-  LoadPhoto,
+  NotFound,
+  Offer,
 } from "./components/Components";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/news" element={<News />} />
         <Route path="/collections" element={<Collection />} />
-        <Route path="/load" element={<LoadPhoto />} />
+        <Route path="/collections/*" element={<CollectionPage />} />
+        <Route path="/offer" element={<Offer />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

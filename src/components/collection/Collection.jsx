@@ -1,72 +1,86 @@
-import React, { useState, useEffect } from "react";
-import {
-  getStorage,
-  ref as sRef,
-  getDownloadURL,
-  list,
-  listAll,
-  getMetadata,
-} from "firebase/storage";
-import { getDatabase, child, get, ref, set } from "firebase/database";
+import React, { useState, useEffect, useContext } from "react";
+import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
 import "./collection.scss";
+import { containerClasses, Pagination, Typography } from "@mui/material";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { CollectionPage } from "../Components";
+import { IndeterminateCheckBox } from "@mui/icons-material";
+import Context from "../context";
+import CollectionItem from "./CollectionItem";
 
-function Collection() {
-  const [image, setImage] = useState([]);
-  const [imgName, setImgName] = useState([]);
-  const storage = getStorage();
-
-  const listImage = () => {
-    listAll(sRef(storage, "collection/"))
-      .then((res) => {
-        res.items.forEach((itemref) => {
-          getDownloadURL(itemref)
-            .then((url) => {
-              setImage((image) => [...image, url]);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          getMetadata(itemref)
-            .then((name) => {
-              setImgName((name) => [...name.name]);
-              console.log(name.name);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+function Collection(props) {
+  const database = getDatabase(app);
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    listImage();
+    get(child(ref(database), `collection/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setData({ ...snapshot.val() });
+        } else {
+          setData({});
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
-  console.log(imgName);
+  const [page, setPage] = useState(1);
+  const [collectionBegin, setCollectionBegin] = useState(1);
+  const [collectionEnd, setCollectionEnd] = useState(4);
 
-  // getMetadata(sRef(storage, "collection/Коллекция весна 2022.png"))
-  //   .then((metadata) => {
-  //     console.log(metadata.name);
-  //     // Metadata now contains the metadata for 'images/forest.jpg'
-  //   })
-  //   .catch((error) => {
-  //     // Uh-oh, an error occurred!
-  //   });
+  const handleChange = function (event, value) {
+    setPage(value);
+    setCollectionBegin(value * 4 - 3);
+    setCollectionEnd(value * 4);
+  };
 
   return (
     <div className="collection">
-      Collection
       <div className="container">
-        <div className="collection__main">
-          {image.map((item, id) => (
-            <>
-              <img src={item} alt={item} key={item + id} />
-              <p>{imgName}</p>
-            </>
-          ))}
+        <h1 className="collection__title">Коллекции</h1>
+        <div className="collection__inner">
+          {Object.keys(data).map((id, index) => {
+            if (id >= collectionBegin && id <= collectionEnd) {
+              return (
+                <div className="collection__card" key={index + id}>
+                  <Link to={`${data[id].collectionId}`}>
+                    <img
+                      className="collection__card-photo"
+                      src={data[id].collectionImg}
+                      alt={data[id].collectionTitle}
+                      data_id={data[id].collectionId}
+                    />
+                  </Link>
+                  <p className="collection__card-text">
+                    {data[id].collectionTitle}
+                  </p>
+
+                  <Link to={`${data[id].collectionId}`}>
+                    <div className="collection__card-link">Смотреть все</div>
+                  </Link>
+                  <Routes>
+                    <Route
+                      path={`${data[id].collectionId}`}
+                      element={<CollectionPage />}
+                    />
+                  </Routes>
+                </div>
+              );
+            }
+          })}
+        </div>
+
+        <div className="pagination">
+          <Pagination
+            count={Math.round(Object.keys(data).length / 4)}
+            page={page}
+            variant="outlined"
+            shape="rounded"
+            onChange={handleChange}
+          />
         </div>
       </div>
     </div>

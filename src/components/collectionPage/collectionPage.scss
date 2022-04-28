@@ -1,0 +1,64 @@
+@import "../var";
+
+.collectionPage {
+  &__title {
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    wrap: wrap;
+    gap: 8px;
+  }
+
+  &__card {
+    &-name {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $primary-text;
+      padding-top: 6px;
+    }
+
+    &-price {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $primary-text;
+      padding-top: 6px;
+    }
+
+    &-size {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: #7c7c7c;
+      padding-top: 6px;
+    }
+
+    &-colors {
+      width: 100%;
+      display: flex;
+      // flex-direction: row;
+      justify-content: space-between;
+      width: 200px;
+      padding: 10px 0;
+      span {
+        width: 12px;
+        height: 12px;
+        border-radius: 100%;
+        cursor: pointer;
+        transition: 0.1s;
+        padding: 5px;
+
+        &:nth-child(6) {
+          outline: 2px solid gray;
+        }
+
+        &:hover {
+          outline: 2px solid gray;
+          transition: 0.1s;
+        }
+      }
+    }
+  }
+}
