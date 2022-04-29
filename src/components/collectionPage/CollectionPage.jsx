@@ -5,12 +5,12 @@ import Context from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
 import "./collectionPage.scss";
+import Carousel from "nuka-carousel";
 
 function CollectionPage() {
   const val = useContext(Context);
   console.log(val);
   let coll = window.location.href.slice(-1);
-  console.log(coll);
 
   const database = getDatabase(app);
   const [data, setData] = useState({});
@@ -39,12 +39,39 @@ function CollectionPage() {
           {Object.keys(data).map((id, index) => {
             return (
               <div className="collectionPage__card" key={index + id}>
-                <img
-                  className="collectionPage__card-photo"
-                  src={data[id].productImg}
-                  alt={data[id].productName}
-                  data_id={data[id].collectionId}
-                />
+                {typeof data[id].productImg !== "string" ? (
+                  <Carousel
+                    wrapAround={true}
+                    slidesToShow={1}
+                    defaultControlsConfig={{
+                      nextButtonStyle: {
+                        display: "none",
+                      },
+                      prevButtonStyle: {
+                        display: "none",
+                      },
+                    }}
+                  >
+                    {data[id].productImg.map((img) => {
+                      return (
+                        <img
+                          className="collectionPage__card-photo"
+                          src={img}
+                          alt={img}
+                        />
+                      );
+                    })}
+                  </Carousel>
+                ) : (
+                  <img
+                    className="collectionPage__card-photo"
+                    src={data[id].productImg}
+                    alt={data[id].productImg}
+                  />
+                )}
+
+                {/* {console.log(data[2].productImg)}
+                {console.log(data[3].productImg)} */}
                 <h2 className="collectionPage__card-name">
                   {data[id].productName}
                 </h2>
