@@ -28,13 +28,14 @@ function Collection(props) {
   }, []);
 
   const [page, setPage] = useState(1);
-  const [collectionBegin, setCollectionBegin] = useState(1);
-  const [collectionEnd, setCollectionEnd] = useState(4);
+  const [collectionBegin, setCollectionBegin] = useState(0);
+  const [collectionEnd, setCollectionEnd] = useState(3);
+  const perPage = 4;
 
   const handleChange = function (event, value) {
     setPage(value);
-    setCollectionBegin(value * 4 - 3);
-    setCollectionEnd(value * 4);
+    setCollectionBegin(value * perPage - perPage);
+    setCollectionEnd(value * perPage - 1);
   };
 
   return (
@@ -43,7 +44,7 @@ function Collection(props) {
         <h1 className="collection__title">Коллекции</h1>
         <div className="collection__inner">
           {Object.keys(data).map((id, index) => {
-            if (id >= collectionBegin && id <= collectionEnd) {
+            if (index >= collectionBegin && index <= collectionEnd) {
               return (
                 <div className="collection__card" key={index + id}>
                   <Link to={`${data[id].collectionId}`}>
@@ -75,7 +76,7 @@ function Collection(props) {
 
         <div className="pagination">
           <Pagination
-            count={Math.round(Object.keys(data).length / 4)}
+            count={Math.round(Object.keys(data).length / perPage)}
             page={page}
             variant="outlined"
             shape="rounded"

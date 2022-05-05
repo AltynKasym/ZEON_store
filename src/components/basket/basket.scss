@@ -1,0 +1,6 @@
+.basket {
+  &__products {
+    display: flex;
+    flex-direction: column;
+  }
+}

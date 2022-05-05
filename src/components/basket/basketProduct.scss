@@ -1,0 +1,60 @@
+.basketProduct {
+  display: flex;
+
+  &__media {
+    img {
+      width: 112px;
+      margin: 12px;
+    }
+  }
+
+  &__info {
+    padding: 12px 4px;
+    &-title {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #393939;
+    }
+
+    &-size {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: #7c7c7c;
+      padding: 15px 0 6px;
+
+      span {
+        padding-left: 4px;
+      }
+    }
+
+    &-color {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: #7c7c7c;
+    }
+
+    &-price {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: #393939;
+      padding: 6px 0 12px;
+
+      span {
+        text-decoration: line-through;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #adadad;
+        display: inline-block;
+        padding-left: 6px;
+      }
+    }
+
+    &-oldPrice {
+    }
+  }
+}

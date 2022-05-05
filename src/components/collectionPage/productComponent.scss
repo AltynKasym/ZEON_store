@@ -1,50 +1,61 @@
 @import "../var";
 
-.collectionPage {
-  background-color: $main-bgc;
+.productComponent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  wrap: wrap;
+  gap: 8px;
   &__title {
   }
-  &__inner {
-    // display: flex;
-    // flex-direction: column;
-  }
+  //   &__inner {
+  //     display: grid;
+  //     grid-template-columns: repeat(4, 1fr);
+  //     wrap: wrap;
+  //     gap: 8px;
+  //   }
 
-  &__products {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    wrap: wrap;
-    gap: 8px;
-  }
-
-  &__newProducts {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 64px;
-
-    &-title {
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 29px;
-      color: #393939;
-      padding: 64px 0 16px;
-    }
-  }
-
-  &-img {
+  &__img {
     position: relative;
   }
 
   &__card {
     position: relative;
 
-    &:hover::after {
-      content: url("../img/fav2.png");
-      display: block;
+    &-favoriteRemove {
       position: absolute;
-      right: 10px;
-      top: 4px;
-      transform: scale(0.6);
+      top: 10px;
+      right: 11px;
+      width: 24px;
+      height: 22px;
+      background-image: url("../img/fav1.png");
+
+      &:hover {
+        transform: scale(1.1);
+        transition: all 0.2s;
+      }
     }
+
+    &-favoriteAdd {
+      position: absolute;
+      top: 10px;
+      right: 11px;
+      width: 24px;
+      height: 22px;
+      background-image: url("../img/fav2.png");
+
+      &:hover {
+        transform: scale(1.1);
+        transition: all 0.2s;
+      }
+    }
+
+    // &:hover::after {
+    //   content: url("../img/fav2.png");
+    //   display: block;
+    //   position: absolute;
+    //   right: 10px;
+    //   top: 10px;
+    // }
 
     &-name {
       font-weight: 400;
@@ -106,33 +117,25 @@
     }
 
     &-colors {
-      width: 100%;
+      width: 100px;
       display: flex;
-      // flex-direction: row;
-      justify-content: space-between;
+      // justify-content: space-between;
       width: 200px;
       padding: 10px 0;
+
+      span + span {
+        margin-left: 10px;
+      }
       span {
         width: 8px;
         height: 8px;
         border-radius: 100%;
-        cursor: pointer;
-        padding: 5px;
+        padding: 2px;
 
         &:nth-child(6) {
           outline: 2px solid gray;
         }
-
-        &:hover {
-          outline: 2px solid gray;
-        }
       }
     }
-  }
-
-  &__pagination {
-    display: flex;
-    justify-content: end;
-    padding-top: 16px;
   }
 }
