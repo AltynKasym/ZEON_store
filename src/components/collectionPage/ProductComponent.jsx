@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import CollectionItem from "../collection/CollectionItem";
 import { Collection } from "../Components";
 import Context from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
@@ -15,32 +14,37 @@ function ProductComponent({ data, id, collectionId }) {
   }
 
   const [addFavorites, setAddFavorites] = useState(false);
-  let favorites = JSON.parse(localStorage.getItem("favorites"));
 
-  function checkFavorite() {
+  useEffect(() => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
     if (favorites.includes(`${collectionId}, ${data[id].productId}`)) {
-      setAddFavorites(false);
-    } else {
       setAddFavorites(true);
+    } else {
+      setAddFavorites(false);
     }
-  }
+  }, []);
 
   function addToFavorites() {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
     if (favorites.length === 0)
       favorites.push(`${collectionId}, ${data[id].productId}`);
     else {
       if (favorites.includes(`${collectionId}, ${data[id].productId}`)) {
         favorites.splice(
-          favorites.indexOf(`${collectionId}, ${data[id].productId}`, 1)
+          favorites.indexOf(`${collectionId}, ${data[id].productId}`),
+          1
         );
-        setAddFavorites(true);
+        setAddFavorites(false);
       } else {
         favorites.push(`${collectionId}, ${data[id].productId}`);
-        setAddFavorites(false);
+        setAddFavorites(true);
       }
+      localStorage.setItem("favorites", JSON.stringify(favorites));
     }
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
+
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <div className="productComponent__card">
@@ -48,6 +52,8 @@ function ProductComponent({ data, id, collectionId }) {
         <Link to={`/collection/product/${collectionId}/${data[id].productId}`}>
           {typeof data[id].productImg !== "string" ? (
             <Carousel
+              autoplay={true}
+              dragging={true}
               wrapAround={true}
               slidesToShow={1}
               defaultControlsConfig={{
@@ -66,6 +72,8 @@ function ProductComponent({ data, id, collectionId }) {
                     src={img}
                     alt={img}
                     key={img}
+                    onMouseEnter={() => setIsShown(true)}
+                    onMouseLeave={() => setIsShown(false)}
                   />
                 );
               })}
@@ -75,17 +83,43 @@ function ProductComponent({ data, id, collectionId }) {
               className="productComponent__card-photo"
               src={data[id].productImg}
               alt={data[id].productImg}
+              onMouseEnter={() => setIsShown(true)}
+              onMouseLeave={() => setIsShown(false)}
             />
           )}
         </Link>
+        {isShown && (
+          <div className="productComponent__card-showAllPhotos">
+            {typeof data[id].productImg !== "string" ? (
+              data[id].productImg.map((img) => {
+                return (
+                  <img
+                    className="productComponent__card-photo"
+                    src={img}
+                    alt={img}
+                    key={img}
+                    
+                  />
+                );
+              })
+            ) : (
+              <img
+                className="productComponent__card-photo"
+                src={data[id].productImg}
+                alt={data[id].productImg}
+                
+              />
+            )}
+          </div>
+        )}
         <p
           className={
             addFavorites
-              ? "productComponent__card-favoriteRemove"
-              : "productComponent__card-favoriteAdd"
+              ? "productComponent__card-favoriteAdd"
+              : "productComponent__card-favoriteRemove"
           }
           onClick={addToFavorites}
-          onLoad={checkFavorite}
+          // onLoad={checkFavorite}
         ></p>
         <h2 className="productComponent__card-name">{data[id].productName}</h2>
         {data[id].productOldPrice > 0 ? (

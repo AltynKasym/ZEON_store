@@ -1,39 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  getStorage,
-  ref as sRef,
-  getDownloadURL,
-  list,
-  listAll,
-} from "firebase/storage";
+// import {   getStorage,   ref as sRef,   getDownloadURL,   list,   listAll, } from "firebase/storage";
 import { getDatabase, child, get, ref, set } from "firebase/database";
 import { app } from "../Database";
 import "./aboutUs.scss";
 
 function AboutUs() {
-  const [image, setImage] = useState([]);
-  const storage = getStorage();
-
-  const listImage = () => {
-    listAll(sRef(storage, "about_us/"))
-      .then((res) => {
-        res.items.forEach((itemref) => {
-          getDownloadURL(itemref)
-            .then((url) => {
-              setImage((image) => [...image, url]);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    listImage();
-  }, []);
-
   const database = getDatabase(app);
   const [data, setData] = useState({});
 
@@ -56,9 +27,11 @@ function AboutUs() {
       <div className="container">
         <div className="about-us__inner">
           <div className="about-us__media">
-            {image.map((item, name) => (
-              <img src={item} alt={name} key={item + name} />
-            ))}
+            {Object.keys(data).map((id, index) => {
+              return data[id].img.map((item, name) => (
+                <img src={item} alt={name} key={item + name} />
+              ));
+            })}
           </div>
           <div className="about-us__info">
             {Object.keys(data).map((id, index) => {

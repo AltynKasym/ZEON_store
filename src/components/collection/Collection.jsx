@@ -7,25 +7,24 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { CollectionPage } from "../Components";
 import { IndeterminateCheckBox } from "@mui/icons-material";
 import Context from "../context";
-import CollectionItem from "./CollectionItem";
 
-function Collection(props) {
-  const database = getDatabase(app);
-  const [data, setData] = useState({});
+function Collection({ data }) {
+  // const database = getDatabase(app);
+  // const [data, setData] = useState({});
 
-  useEffect(() => {
-    get(child(ref(database), `collection/`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setData({ ...snapshot.val() });
-        } else {
-          setData({});
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   get(child(ref(database), `collection/`))
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         setData({ ...snapshot.val() });
+  //       } else {
+  //         setData({});
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   const [page, setPage] = useState(1);
   const [collectionBegin, setCollectionBegin] = useState(0);

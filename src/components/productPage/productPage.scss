@@ -189,6 +189,7 @@
   &__button {
     display: flex;
     justify-content: space-between;
+    position: relative;
 
     &-basket {
       padding: 10px 132px;
@@ -204,6 +205,25 @@
         top: 2px;
         right: 12px;
       }
+    }
+
+    &-toBasket {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      background-color: #1d1d1b;
+      border: none;
+      display: flex;
+      align-items: center;
+      padding: 13px 132px;
+      margin: 0;
+      display: block;
+      width: 90%;
+      // height: 10%;
     }
 
     &-favoritesAdd {

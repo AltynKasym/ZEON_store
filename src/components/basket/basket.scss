@@ -1,6 +1,51 @@
+@import "../var";
+
 .basket {
+  background-color: $main-bgc;
+
+  &__inner {
+    display: flex;
+    padding: 11px 0 96px;
+  }
+
   &__products {
     display: flex;
     flex-direction: column;
+    width: 770px;
+    &-item {
+      padding-bottom: 8px;
+    }
+  }
+
+  &__orderDetail {
+    height: fit-content;
+    background-color: #fff;
+    padding: 24px;
+    margin-left: 16px;
+
+    &-title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      color: #393939;
+      padding: 0 0 16px;
+    }
+
+    &-info {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #979797;
+      padding-bottom: 12px;
+      span {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: right;
+        color: #393939;
+      }
+    }
   }
 }

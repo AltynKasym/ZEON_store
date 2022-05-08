@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -13,6 +13,7 @@ import {
   getDownloadURL,
   listAll,
 } from "firebase/storage";
+import { Context } from "../context";
 
 function Header() {
   const database = getDatabase(app);
@@ -77,11 +78,38 @@ function Header() {
     setOpenMenu(!openMenu);
   }
 
-  const inputHandler = (e) => {
-    console.log(e.target.value);
-  };
+  const [searchText, setSearchText] = useContext(Context);
+  let text;
+  function searchInfo() {
+    setSearchText(text);
+  }
 
-  function searchInfo() {}
+  if (localStorage.getItem("favorites") === null) {
+    localStorage.setItem("favorites", JSON.stringify([]));
+  }
+
+  if (localStorage.getItem("basket") === null) {
+    localStorage.setItem("basket", JSON.stringify([]));
+  }
+
+  let favorites = JSON.parse(localStorage.getItem("favorites"));
+  const [favoriteSatus, setFavoriteStatus] = useState(false);
+  useEffect(() => {
+    if (favorites.length !== 0) setFavoriteStatus(true);
+    else setFavoriteStatus(false);
+  }, [favorites]);
+
+  let basket = JSON.parse(localStorage.getItem("basket"));
+  const [basketSatus, setbasketStatus] = useState(false);
+  useEffect(() => {
+    if (basket.length !== 0) setbasketStatus(true);
+    else setbasketStatus(false);
+  }, [basket]);
+
+  const [collbackStatus, setCollbackStatus] = useState(false);
+  function openCollback() {
+    setCollbackStatus(!collbackStatus);
+  }
 
   return (
     <header className="header">
@@ -159,25 +187,87 @@ function Header() {
             </a>
             {/* </div> */}
             <div className="header__bottom-search">
-              <input type="text" placeholder="Поиск" onChange={inputHandler} />
-              <SearchOutlinedIcon
-                className="header__bottom-search-icon"
-                onClick={searchSlider}
+              <input
+                type="text"
+                placeholder="Поиск"
+                onChange={(e) => {
+                  text = e.target.value.trim();
+                }}
               />
+              <span
+                className="header__bottom-search-icon"
+                onClick={searchInfo}
+              />
+
+              <span />
             </div>
-            <div className="header__bottom-favorites">
-              <FavoriteBorderIcon />
-              <span>Избранное</span>
+            <div
+              className={
+                favoriteSatus
+                  ? "header__bottom-icon header__bottom-favoritesHave"
+                  : "header__bottom-icon header__bottom-favoritesNo"
+              }
+            >
+              <Link to="/favorites">
+                <span>Избранное</span>
+              </Link>
             </div>
-            <div className="header__bottom-favorites header__bottom-basket">
-              <ShoppingBasketOutlinedIcon />
-              <span>Корзина</span>
+            <div
+              className={
+                basketSatus
+                  ? "header__bottom-basket header__bottom-basketHave"
+                  : "header__bottom-basket header__bottom-basketNo"
+              }
+            >
+              <Link to="/basket">
+                <span>Корзина</span>
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
       <div className="header__breadcrumb"></div>
+      <div className="header__connection">
+        <div
+          className="header__connection-goUp"
+          onClick={() => window.scrollTo(0, 0)}
+        ></div>
+        <div className="header__connection-chat">
+          <div
+            style={collbackStatus ? { display: "flex" } : { display: "none" }}
+          >
+            <span className="header__connection-item"></span>
+            <span className="header__connection-item"></span>
+            <span className="header__connection-item"></span>
+          </div>
+          <span
+            className={
+              collbackStatus
+                ? "header__connection-controlButton"
+                : "header__connection-controlButtonClose"
+            }
+            onClick={openCollback}
+          ></span>
+        </div>
+      </div>
+      {/* <div className="header__modal">
+        <h2 className="header__modal-title">Если у Вас остались вопросы</h2>
+        <p className="header__modal-text">
+          Оставьте заявку и мы обязательно Вам перезвоним
+        </p>
+        <input
+          type="text"
+          className="header__modal-input"
+          placeholder="Как к Вам обращаться?"
+        />
+        <input
+          type="tel"
+          className="header__modal-input"
+          placeholder="Номер телефона"
+        />
+        <button className="header__modal-send">Заказать звонок</button>
+      </div> */}
     </header>
   );
 }

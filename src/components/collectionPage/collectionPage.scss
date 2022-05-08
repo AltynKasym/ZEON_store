@@ -37,6 +37,14 @@
   &__card {
     position: relative;
 
+    &-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 29px;
+      color: #393939;
+      padding: 32px 0 18px;
+    }
+
     &:hover::after {
       content: url("../img/fav2.png");
       display: block;

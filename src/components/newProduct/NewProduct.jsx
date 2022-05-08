@@ -3,28 +3,31 @@ import { ProductComponent } from "../Components";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
 import "./newProduct.scss";
+import { Context } from "../context";
 
-function NewProduct({ collectionId, amount }) {
-  // let collectionId = window.location.href.split("/")[4];
+function NewProduct({ collectionId = 1, data }) {
+  // const database = getDatabase(app);
+  // const [data, setData] = useState({});
 
-  const database = getDatabase(app);
-  const [data, setData] = useState({});
+  // useEffect(() => {
+  //   get(child(ref(database), `collection/`))
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         setData({ ...snapshot.val() });
+  //       } else {
+  //         setData({});
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    get(child(ref(database), `collection/`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setData({ ...snapshot.val() });
-        } else {
-          setData({});
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // var number = [];
+  // const [data] = useContext(Context);
 
-  var number = [];
+  console.log(data, "newProd data");
+  // console.log(collectionId, "collId");
 
   return (
     <div className="newProduct">
@@ -34,14 +37,8 @@ function NewProduct({ collectionId, amount }) {
             return data[id].collectionProducts.map((item, index) => {
               if (item.newProduct) {
                 {
-                  /* number.push(index);
-                console.log(item, "id  ");
-                console.log(index, "index  ");
-                console.log(number, "number  ");
-                console.log(number.length, "шт"); 
-                  console.log(item, "id  ");*/
+                  /* if (ind < 1) */
                 }
-
                 return (
                   <ProductComponent
                     data={data[id].collectionProducts}
@@ -52,9 +49,6 @@ function NewProduct({ collectionId, amount }) {
                 );
               }
             });
-          }
-          {
-            /* console.log(Math.ceil(Math.random() * number.length), "random"); */
           }
         })}
       </div>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import CollectionItem from "../collection/CollectionItem";
 import {
   Collection,
   NewProduct,
   ProductComponent,
   BasketProduct,
 } from "../Components";
-import Context from "../context";
+import { Context } from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
 import "./basket.scss";
@@ -14,35 +13,31 @@ import Carousel from "nuka-carousel";
 import { Link } from "react-router-dom";
 import { containerClasses, Pagination, Typography } from "@mui/material";
 
-function Basket() {
-  const database = getDatabase(app);
-  const [data, setData] = useState({});
-
+function Basket({ data }) {
   let basket = JSON.parse(localStorage.getItem("basket"));
 
-  useEffect(() => {
-    get(child(ref(database), `collection/`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setData({ ...snapshot.val() });
-        } else {
-          setData({});
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // const database = getDatabase(app);
+  // const [data, setData] = useState({});
+  // useEffect(() => {
+  //   get(child(ref(database), `collection/`))
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         setData({ ...snapshot.val() });
+  //       } else {
+  //         setData({});
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [basket]);
 
   let [step, setStep] = useState(4);
+  const [products, setProducts] = useContext(Context);
 
   return (
     <div className="basket">
       <div className="container">
-        <h3 className="basket__title">Корзина</h3>
-        <p className="basket__amount">
-          Товаров в корзине: <span>{basket.length}</span>
-        </p>
         <div className="basket__inner">
           <div className="basket__products">
             {Object.keys(data).map((id, ind) => {
@@ -52,17 +47,12 @@ function Basket() {
                     if (itemm.productId == item.split(",")[1]) {
                       return (
                         <>
-                          {/* <ProductComponent
-                            data={data[id].collectionProducts}
-                            id={index}
-                            collectionId={data[id].collectionId}
-                            key={item + index}
-                          /> */}
-
                           <BasketProduct
+                            className="basket__products-item"
                             data={data[id].collectionProducts}
                             id={index}
                             collectionId={data[id].collectionId}
+                            color={item.split(",")[2].trim()}
                             key={item + index}
                           />
                         </>
@@ -72,6 +62,17 @@ function Basket() {
                 }
               });
             })}
+          </div>
+          <div className="basket__orderDetail">
+            <h2 className="basket__orderDetail-title">Сумма заказа</h2>
+            <p className="basket__orderDetail-info">
+              Количество линеек:{products}
+            </p>
+            <p className="basket__orderDetail-info">Количество товаров:</p>
+            <p className="basket__orderDetail-info">Стоимость:</p>
+            <p className="basket__orderDetail-info">Скидка:</p>
+            <p className="basket__orderDetail-info">Итого к оплате:</p>
+            <button className="basket__orderButton">Оформить заказ</button>
           </div>
         </div>
       </div>

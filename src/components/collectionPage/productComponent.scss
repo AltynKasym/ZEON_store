@@ -21,6 +21,19 @@
   &__card {
     position: relative;
 
+    &-showAllPhotos {
+      position: absolute;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      flex-wrap: wrap;
+      width: 500px;
+      gap: 5px;
+      z-index: 999;
+      border: 1px solid #1d1d1b;
+      padding: 20px;
+      background-color: #fff;
+    }
+
     &-favoriteRemove {
       position: absolute;
       top: 10px;
@@ -133,7 +146,7 @@
         padding: 2px;
 
         &:nth-child(6) {
-          outline: 2px solid gray;
+          outline: 1px solid lightgray;
         }
       }
     }

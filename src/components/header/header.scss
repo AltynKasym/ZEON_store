@@ -62,7 +62,7 @@
     &-search {
       align-items: center;
       input {
-        width: 675px;
+        width: 670px;
         min-width: 65px;
         height: 44px;
         padding-left: 20px;
@@ -75,16 +75,18 @@
       }
 
       &-icon {
-        font-family: "Material Icons";
-        font-size: 50px;
+        background: url("../img/search-icon.png") no-repeat center;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
         position: relative;
-        left: -35px;
-        top: 7px;
+        left: -30px;
+        top: 3px;
         margin-right: -30px;
       }
     }
 
-    &-favorites {
+    &-icon {
       display: flex;
       align-items: center;
       font-family: "Montserrat";
@@ -93,20 +95,147 @@
       font-size: 16px;
       line-height: 20px;
       color: $primary-text;
+      margin-left: 68px;
+    }
 
-      span {
-        padding-left: 10px;
+    &-favoritesHave {
+      &::before {
+        content: url("../img/heart.png");
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+        left: -20px;
+        top: -2px;
+      }
+    }
+    &-favoritesNo {
+      &::before {
+        content: url("../img/fav3.png");
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+        left: -20px;
+        top: -2px;
       }
     }
 
     &-basket {
       padding-left: 20px;
       border-left: 1px solid rgba(133, 133, 133, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: $primary-text;
+      padding-left: 35px;
+
+      // span {
+      //   padding-left: 10px;
+      //   background: url("../img/basket-icon.png") no-repeat center;
+      //   position: relative;
+      //   left: -30px;
+      //   top: 3px;
+      // }
+    }
+    &-basketHave {
+      &::before {
+        content: url("../img/shopping-bag.png");
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+        left: -20px;
+        top: -2px;
+      }
+    }
+
+    &-basketNo {
+      &::before {
+        content: url("../img/basket-icon.png");
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+        left: -20px;
+        top: -2px;
+      }
     }
   }
   a {
     text-decoration: none;
     color: $primary-text;
+  }
+
+  &__connection {
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+
+    &-goUp {
+      background: url("../img/GoUp.png") no-repeat center;
+      width: 28px;
+      height: 25px;
+      display: flex;
+    }
+    &-controlButtonClose {
+      background: url("../img/Chat.png") no-repeat center;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      margin-bottom: 5px;
+    }
+    &-controlButton {
+      background: url("../img/closeButton.png") no-repeat center;
+      width: 28px;
+      height: 25px;
+      display: flex;
+      // margin-bottom: 10px;
+    }
+
+    &-chat {
+      display: flex;
+      align-items: center;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 150px;
+        margin-right: 20px;
+      }
+    }
+
+    &-item {
+      // position: absolute;
+      display: flex;
+      &:nth-child(1) {
+        background: url("../img/telephone.png") no-repeat center;
+        width: 45px;
+        height: 45px;
+        display: flex;
+      }
+
+      &:nth-child(2) {
+        background: url("../img/whatsapp.png") no-repeat center;
+        width: 45px;
+        height: 45px;
+        display: flex;
+      }
+      &:nth-child(3) {
+        background: url("../img/telegram.png") no-repeat center;
+        width: 45px;
+        height: 45px;
+        display: flex;
+      }
+    }
   }
 }
 
