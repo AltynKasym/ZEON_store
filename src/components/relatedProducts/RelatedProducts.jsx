@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { ProductComponent } from "../Components";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
-import "./newProduct.scss";
+import "./relatedProducts.scss";
 import { Context } from "../context";
 
-function NewProduct({ collectionId = 1, data }) {
+function RelatedProducts({ collectionId = 1, data, productId }) {
   // const database = getDatabase(app);
   // const [data, setData] = useState({});
 
@@ -23,26 +23,28 @@ function NewProduct({ collectionId = 1, data }) {
   //     });
   // }, []);
 
-  let number = [];
+  // var number = [];
   // const [data] = useContext(Context);
 
   return (
-    <div className="newProduct">
-      <div className="newProduct__inner">
+    <div className="related">
+      Related Product
+      <div className="related__inner">
         {Object.keys(data).map((id, ind) => {
           if (id == collectionId - 1) {
-            return data[id].collectionProducts.map((item, index) => {
-              if (item.newProduct) {
-                return (
-                  <ProductComponent
-                    data={data[id].collectionProducts}
-                    id={index}
-                    collectionId={data[id].collectionId}
-                    key={item + index}
-                  />
-                );
-              }
-            });
+            return data[id].collectionProducts
+              .slice(0, 6)
+              .map((item, index) => {
+                if (productId - 1 !== index)
+                  return (
+                    <ProductComponent
+                      data={data[id].collectionProducts}
+                      id={index}
+                      collectionId={data[id].collectionId}
+                      key={item + index}
+                    />
+                  );
+              });
           }
         })}
       </div>
@@ -50,4 +52,4 @@ function NewProduct({ collectionId = 1, data }) {
   );
 }
 
-export default NewProduct;
+export default RelatedProducts;

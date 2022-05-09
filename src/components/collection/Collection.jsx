@@ -6,7 +6,7 @@ import { containerClasses, Pagination, Typography } from "@mui/material";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { CollectionPage } from "../Components";
 import { IndeterminateCheckBox } from "@mui/icons-material";
-import Context from "../context";
+import { Context } from "../context";
 
 function Collection({ data }) {
   // const database = getDatabase(app);
@@ -26,10 +26,10 @@ function Collection({ data }) {
   //     });
   // }, []);
 
+  const perPage = 8;
   const [page, setPage] = useState(1);
   const [collectionBegin, setCollectionBegin] = useState(0);
-  const [collectionEnd, setCollectionEnd] = useState(3);
-  const perPage = 4;
+  const [collectionEnd, setCollectionEnd] = useState(perPage - 1);
 
   const handleChange = function (event, value) {
     setPage(value);

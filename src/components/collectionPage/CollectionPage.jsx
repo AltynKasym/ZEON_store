@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Collection, NewProduct, ProductComponent } from "../Components";
-import Context from "../context";
+import { Context } from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
 import "./collectionPage.scss";
@@ -28,11 +28,12 @@ function CollectionPage({ data }) {
   //     });
   // }, []);
 
+  const perPage = 12;
   const [page, setPage] = useState(1);
   const [collectionBegin, setCollectionBegin] = useState(0);
-  const [collectionEnd, setCollectionEnd] = useState(3);
+  const [collectionEnd, setCollectionEnd] = useState(perPage - 1);
 
-  const perPage = 4;
+  let alldata = [];
 
   const handleChange = function (event, value) {
     setPage(value);
@@ -53,6 +54,7 @@ function CollectionPage({ data }) {
             {Object.keys(data).map((id, ind) => {
               if (id == collectionId - 1) {
                 return data[id].collectionProducts.map((item, index) => {
+                  alldata.push(item);
                   if (index >= collectionBegin && index <= collectionEnd) {
                     return (
                       <>
@@ -62,32 +64,17 @@ function CollectionPage({ data }) {
                           collectionId={data[id].collectionId}
                           key={item + index}
                         />
-
-                        
                       </>
                     );
                   }
                 });
               }
             })}
-            {/* {Object.keys(data).map((id, ind) => {
-              if (id >= collectionBegin && id <= collectionEnd) {
-                return (
-                  <div className="collectionPage_inner-block" key={id + ind}>
-                    <ProductComponent
-                      data={data}
-                      id={id}
-                      collectionId={collectionId}
-                    />
-                  </div>
-                );
-              }
-            })} */}
           </div>
 
           <div className="collectionPage__pagination">
             <Pagination
-              count={Math.round(Object.keys(data).length / perPage)}
+              count={Math.round(alldata.length / perPage)}
               page={page}
               variant="outlined"
               shape="rounded"

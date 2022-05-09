@@ -14,8 +14,9 @@ import {
   listAll,
 } from "firebase/storage";
 import { Context } from "../context";
+import { ModalWindow } from "../Components";
 
-function Header() {
+function Header({ data }) {
   const database = getDatabase(app);
 
   const [image, setImage] = useState([]);
@@ -41,15 +42,15 @@ function Header() {
     listImage();
   }, []);
 
-  const [data, setData] = useState({});
+  const [phone, setPhone] = useState({});
 
   useEffect(() => {
     get(child(ref(database), `phone`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          setData({ ...snapshot.val() });
+          setPhone({ ...snapshot.val() });
         } else {
-          setData({});
+          setPhone({});
         }
       })
       .catch((error) => {
@@ -77,6 +78,8 @@ function Header() {
   function menuSlider() {
     setOpenMenu(!openMenu);
   }
+
+  const [openChat, setOpenChat] = useState(false);
 
   const [searchText, setSearchText] = useContext(Context);
   let text;
@@ -110,6 +113,8 @@ function Header() {
   function openCollback() {
     setCollbackStatus(!collbackStatus);
   }
+
+  let collectionId = window.location.href.split("/")[5];
 
   return (
     <header className="header">
@@ -149,10 +154,10 @@ function Header() {
             <div className="header__top-phone">
               <span>Тел:</span>
 
-              {Object.keys(data).map((id, index) => {
+              {Object.keys(phone).map((id, index) => {
                 return (
-                  <a key={id + index} href={`tel:${data[id].phone}`}>
-                    {data[id].phone}
+                  <a key={id + index} href={`tel:${phone[id].phone}`}>
+                    {phone[id].phone}
                   </a>
                 );
               })}
@@ -226,8 +231,20 @@ function Header() {
           </div>
         </div>
       </div>
+      {/* return data[id].collectionProducts.map((item, index) => {
+              if (item.newProduct) {
+                return (
+                 
+                ); */}
 
-      <div className="header__breadcrumb"></div>
+      <div className="header__breadcrumb">
+        {Object.keys(data).map((id, ind) => {
+          if (id == collectionId - 1) {
+            return <span key={id + ind}>{data[id].collectionTitle}</span>;
+          }
+        })}
+      </div>
+
       <div className="header__connection">
         <div
           className="header__connection-goUp"
@@ -237,9 +254,17 @@ function Header() {
           <div
             style={collbackStatus ? { display: "flex" } : { display: "none" }}
           >
-            <span className="header__connection-item"></span>
-            <span className="header__connection-item"></span>
-            <span className="header__connection-item"></span>
+            <a href="http://t.me">
+              <span className="header__connection-telegram"></span>
+            </a>
+            <a href="http://whatsapp.com">
+              <span className="header__connection-whatsapp"></span>
+            </a>
+
+            <span
+              className="header__connection-item"
+              onClick={() => setOpenChat(!openChat)}
+            ></span>
           </div>
           <span
             className={
@@ -251,23 +276,13 @@ function Header() {
           ></span>
         </div>
       </div>
-      {/* <div className="header__modal">
-        <h2 className="header__modal-title">Если у Вас остались вопросы</h2>
-        <p className="header__modal-text">
-          Оставьте заявку и мы обязательно Вам перезвоним
-        </p>
-        <input
-          type="text"
-          className="header__modal-input"
-          placeholder="Как к Вам обращаться?"
-        />
-        <input
-          type="tel"
-          className="header__modal-input"
-          placeholder="Номер телефона"
-        />
-        <button className="header__modal-send">Заказать звонок</button>
-      </div> */}
+      <div
+        className="header__window"
+        style={openChat ? { display: "block" } : { display: "none" }}
+      >
+        <ModalWindow />
+      </div>
+      
     </header>
   );
 }

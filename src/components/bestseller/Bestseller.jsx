@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { ProductComponent } from "../Components";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
-import "./newProduct.scss";
+import "./bestseller.scss";
 import { Context } from "../context";
 
-function NewProduct({ collectionId = 1, data }) {
+function Bestseller({ data }) {
   // const database = getDatabase(app);
   // const [data, setData] = useState({});
 
@@ -27,19 +27,22 @@ function NewProduct({ collectionId = 1, data }) {
   // const [data] = useContext(Context);
 
   return (
-    <div className="newProduct">
-      <div className="newProduct__inner">
-        {Object.keys(data).map((id, ind) => {
-          if (id == collectionId - 1) {
+    <div className="bestseller">
+      <div className="bestseller__inner">
+        {Object.keys(data)
+        .map((id, ind) => {
+          if (id > 0 && id <= 8) {
             return data[id].collectionProducts.map((item, index) => {
               if (item.newProduct) {
                 return (
-                  <ProductComponent
-                    data={data[id].collectionProducts}
-                    id={index}
-                    collectionId={data[id].collectionId}
-                    key={item + index}
-                  />
+                  <div className="bestseller__product">
+                    <ProductComponent
+                      data={data[id].collectionProducts}
+                      id={index}
+                      collectionId={data[id].collectionId}
+                      key={item + index}
+                    />
+                  </div>
                 );
               }
             });
@@ -50,4 +53,4 @@ function NewProduct({ collectionId = 1, data }) {
   );
 }
 
-export default NewProduct;
+export default Bestseller;

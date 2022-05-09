@@ -2,7 +2,7 @@
 
 .productComponent {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  // grid-template-columns: repeat(4, 1fr);
   wrap: wrap;
   gap: 8px;
   &__title {
@@ -150,5 +150,13 @@
         }
       }
     }
+  }
+}
+
+.pagingDotContainer {
+  width: 150%;
+
+  button {
+    width: 20px;
   }
 }

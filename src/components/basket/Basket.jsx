@@ -4,6 +4,7 @@ import {
   NewProduct,
   ProductComponent,
   BasketProduct,
+  Checkout,
 } from "../Components";
 import { Context } from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
@@ -35,6 +36,8 @@ function Basket({ data }) {
   let [step, setStep] = useState(4);
   const [products, setProducts] = useContext(Context);
 
+  const [openChat, setOpenChat] = useState(false);
+
   return (
     <div className="basket">
       <div className="container">
@@ -53,7 +56,7 @@ function Basket({ data }) {
                             id={index}
                             collectionId={data[id].collectionId}
                             color={item.split(",")[2].trim()}
-                            key={item + index}
+                            key={itemm + index}
                           />
                         </>
                       );
@@ -66,15 +69,23 @@ function Basket({ data }) {
           <div className="basket__orderDetail">
             <h2 className="basket__orderDetail-title">Сумма заказа</h2>
             <p className="basket__orderDetail-info">
-              Количество линеек:{products}
+              Количество линеек: <span>{products}</span>
             </p>
             <p className="basket__orderDetail-info">Количество товаров:</p>
             <p className="basket__orderDetail-info">Стоимость:</p>
             <p className="basket__orderDetail-info">Скидка:</p>
             <p className="basket__orderDetail-info">Итого к оплате:</p>
-            <button className="basket__orderButton">Оформить заказ</button>
+            <button
+              className="basket__orderButton"
+              onClick={() => setOpenChat(!openChat)}
+            >
+              Оформить заказ
+            </button>
           </div>
         </div>
+      </div>
+      <div style={openChat ? { display: "block" } : { display: "none" }}>
+        <Checkout />
       </div>
     </div>
   );

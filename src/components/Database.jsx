@@ -6,14 +6,14 @@ import "firebase/database";
 
 // Your web app's Firebase configuration
 export const app = initializeApp({
-  apiKey: "AIzaSyCXl3ku-C7CbWpevI94cOpnyN-LZ84VazA",
-  authDomain: "zeon-store-9c514.firebaseapp.com",
+  apiKey: "AIzaSyDOATGTMCxF6PknUnzaJJYERLPWG4d2QnM",
+  authDomain: "zeon-store-bb4f8.firebaseapp.com",
   databaseURL:
-    "https://zeon-store-9c514-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "zeon-store-9c514",
-  storageBucket: "zeon-store-9c514.appspot.com",
-  messagingSenderId: "1052383016385",
-  appId: "1:1052383016385:web:2ea0b4c4ab40b0b80aab40",
+    "https://zeon-store-bb4f8-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "zeon-store-bb4f8",
+  storageBucket: "zeon-store-bb4f8.appspot.com",
+  messagingSenderId: "1061024129681",
+  appId: "1:1061024129681:web:6f41fd9a02fd7b90a35530",
 });
 
 // Initialize Firebase

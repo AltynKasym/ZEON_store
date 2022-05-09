@@ -1,8 +1,12 @@
-.newProduct {
+.bestseller {
   &__inner {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     wrap: wrap;
     gap: 8px;
+  }
+
+  &__product {
+    width: 100%;
   }
 }

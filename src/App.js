@@ -18,6 +18,9 @@ import {
   MainPage,
   SearchPage,
   ModalWindow,
+  Checkout,
+  RelatedProducts,
+  Bestseller,
 } from "./components/Components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Context } from "./components/context";
@@ -32,6 +35,7 @@ function App() {
   const [data, setData] = useState({});
   let basket = JSON.parse(localStorage.getItem("basket"));
   let favorites = JSON.parse(localStorage.getItem("favorites"));
+  const [collectionId2, setCollectionId2] = useState(null);
 
   useEffect(() => {
     get(child(ref(database), `collection/`))
@@ -57,10 +61,11 @@ function App() {
           setProductsAmount,
           searchText,
           setSearchText,
-          data,
+          collectionId2,
+          setCollectionId2,
         ]}
       >
-        <Header />
+        <Header data={data} />
         <Routes>
           <Route path="/zeon_store" element={<MainPage data={data} />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -78,8 +83,11 @@ function App() {
             element={<ProductPage data={data} />}
           />
           <Route path="/new" element={<NewProduct />} />
+          <Route path="/bestseller" element={<Bestseller />} />
+          <Route path="/related" element={<RelatedProducts />} />
           <Route path="/search" element={<SearchPage data={data} />} />
           <Route path="/modal" element={<ModalWindow />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

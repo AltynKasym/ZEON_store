@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Collection, NewProduct, ProductComponent } from "../Components";
+import { Collection, RelatedProducts, ProductComponent } from "../Components";
 import Context from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
@@ -95,7 +95,6 @@ function ProductPage({ data }) {
             {Object.keys(data).map((id, ind) => {
               if (id == collectionId - 1) {
                 return data[id].collectionProducts.map((item, index) => {
-                  console.log(item, "item");
                   if (index == productId - 1) {
                     if (typeof item.productImg !== "string") {
                       return item.productImg.map((img) => {
@@ -104,6 +103,7 @@ function ProductPage({ data }) {
                             className="productPage__info-photo"
                             src={img}
                             alt={img}
+                            key={item + index}
                           />
                         );
                       });
@@ -119,38 +119,14 @@ function ProductPage({ data }) {
                 });
               }
             })}
-
-            {/* {Object.keys(data).map((id) => {
-              if (id == productId - 1) {
-                if (typeof data[id].productImg !== "string") {
-                  return data[id].productImg.map((img) => {
-                    return (
-                      <img
-                        className="productPage__info-photo"
-                        src={img}
-                        alt={img}
-                      />
-                    );
-                  });
-                } else
-                  return (
-                    <img
-                      className="productPage__info-photo"
-                      src={data[id].productImg}
-                      alt={data[id].productImg}
-                    />
-                  );
-              }
-            })} */}
           </div>
           <div className="productPage__info-text">
             {Object.keys(data).map((id, ind) => {
               if (id == collectionId - 1) {
                 return data[id].collectionProducts.map((item, index) => {
-                  console.log(item, "item");
                   if (index == productId - 1) {
                     return (
-                      <>
+                      <div key={item + index}>
                         <h1 className="productPage__info-name">
                           {item.productName}
                         </h1>
@@ -251,126 +227,22 @@ function ProductPage({ data }) {
                             onClick={addToFavorites}
                           ></button>
                         </div>
-                      </>
+                      </div>
                     );
                   }
                 });
               }
             })}
-
-            {/*   {Object.keys(data).map((id) => {
-              if (id == productId - 1) {
-                return (
-                  <>
-                    <h1 className="productPage__info-name">
-                      {data[id].productName}
-                    </h1>
-                    <p className="productPage__info-artcode">
-                      Артикул:
-                      <span>{data[id].productArtcode}</span>
-                    </p>
-                    <div className="productPage__info-color">
-                      <p>Цвет:</p>
-                      {data[id].productColors.map((color) => {
-                        return (
-                          <div className="productPage__info-color">
-                            <span
-                              style={{
-                                backgroundColor: `${color}`,
-                              }}
-                            >
-                              <input
-                                data-color={color}
-                                type="radio"
-                                name="color"
-                                id={color}
-                                style={{
-                                  accentColor: `${color}`,
-                                  outline: "none",
-                                }}
-                                onChange={(e) =>
-                                  setColor(e.target.dataset.color)
-                                }
-                              />
-                            </span>
-
-                            {/* <span
-                              data-color={color}
-                              key={color}
-                              style={{ backgroundColor: `${color}` }}
-                              onClick={(e) =>
-                                console.log(e.target.dataset.color)
-                              }
-                            ></span>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <p className="productPage__info-newPrice">
-                      {data[id].productPrice} р
-                    </p>
-                    <span className="productPage__info-oldPrice">
-                      {data[id].productOldPrice > 0 ? (
-                        <>
-                          <span>{`${Math.trunc(
-                            data[id].productOldPrice
-                          )} р`}</span>
-                        </>
-                      ) : (
-                        <span></span>
-                      )}
-                    </span>
-                    <h4 className="productPage__info-aboutTitle">О товаре:</h4>
-                    <p className="productPage__info-aboutText">
-                      {data[id].productInfo}
-                    </p>
-                    <div className="productPage__infoblock">
-                      <p className="productPage__infoblock-item">
-                        Размерный ряд:
-                        <span>{data[id].productSize}</span>
-                      </p>
-
-                      <p className="productPage__infoblock-item">
-                        Состав ткани:
-                        <span> {data[id].productCompound}</span>
-                      </p>
-                      <p className="productPage__infoblock-item">
-                        Количество в линейке:
-                        <span> {data[id].productAmount}</span>
-                      </p>
-                      <p className="productPage__infoblock-item">
-                        Материал:
-                        <span> {data[id].productMaterial}</span>
-                      </p>
-                    </div>
-                    <div className="productPage__button">
-                      <button
-                        className="productPage__button-sale productPage__button-basket "
-                        onClick={addToBasket}
-                      >
-                        {" "}
-                        Добавить в корзину
-                      </button>
-                      <button
-                        className={
-                          addFavorites
-                            ? "productPage__button-sale productPage__button-favoritesRemove"
-                            : "productPage__button-sale productPage__button-favoritesAdd"
-                        }
-                        onClick={addToFavorites}
-                      ></button>
-                    </div>
-                  </>
-                );
-              }
-            })}*/}
           </div>
         </div>
 
         <div className="productPage__newProduct">
           <h2 className="productPage__newProduct-title">Похожие товары</h2>
-          <NewProduct collectionId={collectionId} data={data} />
+          <RelatedProducts
+            collectionId={collectionId}
+            data={data}
+            productId={productId}
+          />
         </div>
       </div>
     </div>

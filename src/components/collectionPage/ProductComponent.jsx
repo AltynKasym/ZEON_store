@@ -57,6 +57,7 @@ function ProductComponent({ data, id, collectionId }) {
               wrapAround={true}
               slidesToShow={1}
               defaultControlsConfig={{
+                pagingDotsContainerClassName: "pagingDotContainer",
                 nextButtonStyle: {
                   display: "none",
                 },
@@ -98,7 +99,6 @@ function ProductComponent({ data, id, collectionId }) {
                     src={img}
                     alt={img}
                     key={img}
-                    
                   />
                 );
               })
@@ -107,7 +107,6 @@ function ProductComponent({ data, id, collectionId }) {
                 className="productComponent__card-photo"
                 src={data[id].productImg}
                 alt={data[id].productImg}
-                
               />
             )}
           </div>
@@ -119,7 +118,6 @@ function ProductComponent({ data, id, collectionId }) {
               : "productComponent__card-favoriteRemove"
           }
           onClick={addToFavorites}
-          // onLoad={checkFavorite}
         ></p>
         <h2 className="productComponent__card-name">{data[id].productName}</h2>
         {data[id].productOldPrice > 0 ? (
