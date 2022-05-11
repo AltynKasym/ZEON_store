@@ -36,6 +36,7 @@ function CollectionPage({ data }) {
   let alldata = [];
 
   const handleChange = function (event, value) {
+    window.scrollTo(0, 0);
     setPage(value);
     setCollectionBegin(value * perPage - perPage);
     setCollectionEnd(value * perPage - 1);
@@ -72,7 +73,7 @@ function CollectionPage({ data }) {
             })}
           </div>
 
-          <div className="collectionPage__pagination">
+          <div className="pagination">
             <Pagination
               count={Math.round(alldata.length / perPage)}
               page={page}
@@ -84,7 +85,7 @@ function CollectionPage({ data }) {
         </div>
         <div className="collectionPage__newProducts">
           <h2 className="collectionPage__newProducts-title">Новинки</h2>
-          <NewProduct collectionId={collectionId} data={data} />
+          <NewProduct collectionId={collectionId} data={data} amount={5} />
         </div>
       </div>
     </div>

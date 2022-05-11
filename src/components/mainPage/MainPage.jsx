@@ -24,17 +24,17 @@ function MainPage({ data }) {
       <div className="container">
         <MainSlider />
         <div className="mainPage__bessteller">
-          <h2>ХИТ продаж</h2>
+          <h2 className="mainPage__title">ХИТ продаж</h2>
           <Bestseller data={data} />
         </div>
 
         <div className="mainPage__new-products">
-          <h2>Новинки</h2>
-          <NewProduct collectionId={1} data={data} />
+          <h2 className="mainPage__title">Новинки</h2>
+          <NewProduct data={data} amount={4} />
         </div>
 
         <div className="mainPage__collections">
-          <h2>Коллекции</h2>
+          <h2 className="mainPage__title">Коллекции</h2>
           <div className="collection__inner">
             {Object.keys(data).map((id, index) => {
               if (id >= 0 && id <= collectionEnd) {
@@ -71,7 +71,13 @@ function MainPage({ data }) {
               }
             })}
           </div>
-          <button onClick={showRest}>Еще</button>
+          <button className="mainPage__button" onClick={showRest}>
+            Еще
+          </button>
+        </div>
+        <div className="mainPage__privilege">
+          <h2 className="mainPage__title">Наши преимущества</h2>
+          <div className="mainPage__privilege-inner"></div>
         </div>
       </div>
     </div>

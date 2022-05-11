@@ -21,7 +21,12 @@
     &-media {
       display: flex;
       flex-direction: column;
-      // width: 65%;
+      width: 50%;
+      padding-bottom: 70px;
+
+      img {
+        width: 100%;
+      }
     }
 
     &-info {
@@ -29,30 +34,69 @@
       flex-direction: column;
       width: 65%;
       padding-left: 24px;
+      padding-bottom: 70px;
     }
 
-    &-accordion {
-      border: none;
-      box-shadow: none;
-      margin: 10px 0;
+    // &-accordion {
+    //   border: none;
+    //   box-shadow: none;
+    //   margin: 10px 0;
 
-      &-title {
-        text-align: left;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-        color: $primary-text;
-      }
-
-      &-text {
-        text-align: left;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 160%;
-        color: #354455;
-      }
-    }
+    //   &-text {
+    //     text-align: left;
+    //     font-weight: 300;
+    //     font-size: 14px;
+    //     line-height: 160%;
+    //     color: #354455;
+    //   }
+    // }
   }
+}
+
+#help__inner-accordion-title {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  color: #393939;
+}
+#help__inner-accordion-text {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 160%;
+  color: #354455;
+}
+
+#help__inner-accordion {
+  margin-bottom: 12px;
+  background-color: #fff;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+
+  &::before {
+    background-color: none;
+  }
+
+  svg {
+    // display: none;
+    opacity: 0;
+  }
+}
+
+.Mui-expanded {
+  margin: 0 !important;
+}
+.MuiAccordionSummary-expandIconWrapper {
+  background: url("../img/accordion-icon.png") no-repeat center;
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root::before {
+  background-color: #fff !important;
 }
 
 @media screen and (max-width: 800px) {

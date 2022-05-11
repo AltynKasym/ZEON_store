@@ -35,7 +35,7 @@ function App() {
   const [data, setData] = useState({});
   let basket = JSON.parse(localStorage.getItem("basket"));
   let favorites = JSON.parse(localStorage.getItem("favorites"));
-  const [collectionId2, setCollectionId2] = useState(null);
+  const [searchProduct, setSearchProduct] = useState("");
 
   useEffect(() => {
     get(child(ref(database), `collection/`))
@@ -61,8 +61,8 @@ function App() {
           setProductsAmount,
           searchText,
           setSearchText,
-          collectionId2,
-          setCollectionId2,
+          searchProduct,
+          setSearchProduct,
         ]}
       >
         <Header data={data} />
@@ -85,7 +85,7 @@ function App() {
           <Route path="/new" element={<NewProduct />} />
           <Route path="/bestseller" element={<Bestseller />} />
           <Route path="/related" element={<RelatedProducts />} />
-          <Route path="/search" element={<SearchPage data={data} />} />
+          <Route path="/search/*" element={<SearchPage data={data} />} />
           <Route path="/modal" element={<ModalWindow />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/offer" element={<Offer />} />

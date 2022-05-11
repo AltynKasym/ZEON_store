@@ -49,7 +49,10 @@ function ProductComponent({ data, id, collectionId }) {
   return (
     <div className="productComponent__card">
       <div className="productComponent__card-img">
-        <Link to={`/collection/product/${collectionId}/${data[id].productId}`}>
+        <Link
+          to={`/collection/product/${collectionId}/${data[id].productId}`}
+          onClick={() => window.scrollTo(0, 0)}
+        >
           {typeof data[id].productImg !== "string" ? (
             <Carousel
               autoplay={true}

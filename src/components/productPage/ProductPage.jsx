@@ -17,7 +17,7 @@ function ProductPage({ data }) {
 
   // useEffect(() => {
   //   get(
-  //     child(ref(database), `collection/${collectionId - 1}/collectionProducts`)
+  //     child(ref(database), `collection/`)
   //   )
   //     .then((snapshot) => {
   //       if (snapshot.exists()) {

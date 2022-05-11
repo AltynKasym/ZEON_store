@@ -150,6 +150,33 @@
         }
       }
     }
+
+    .slider-control-bottomcenter {
+      display: none;
+      bottom: -35px !important;
+      fill: #fff !important;
+
+      // .paging-item {
+      // }
+
+      // .paging-dot {
+      //   fill: white;
+      //   border: 1px solid rgba(29, 29, 27, 0.3);
+      //   border-radius: 50%;
+      //   width: 8px;
+      //   height: 8px;
+      // }
+
+      // .active {
+      //   .paging-dot {
+      //     fill: #1d1d1b;
+      //     border: 1px solid #1d1d1b;
+      //     border-radius: 50%;
+      //     width: 8px;
+      //     height: 8px;
+      //   }
+      // }
+    }
   }
 }
 

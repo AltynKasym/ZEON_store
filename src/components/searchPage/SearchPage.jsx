@@ -26,7 +26,14 @@ function SearchPage({ data }) {
   //     });
   // }, []);
 
+  // let link = window.location.href.split("/");
+  // let searchTxt = link[link.length - 1];
+  // console.log(searchTxt);
+
   const [searchText, setSearchText] = useContext(Context);
+  const [searchProduct, setSearchProduct] = useState(Context);
+
+  console.log(searchProduct, "searchProd from SearchPage");
 
   const [page, setPage] = useState(1);
   const [collectionBegin, setCollectionBegin] = useState(0);
@@ -39,29 +46,31 @@ function SearchPage({ data }) {
     setCollectionEnd(value * perPage - 1);
   };
 
+  let products = new Set();
+  let productsList = [];
+
+  // const [searchProduct, setSearchProduct] = useState("");
+
   return (
-    <div className="favorites">
+    <div className="searchPage">
       <div className="container">
-        <p className="favorites__card-amount">
-          Результаты поиска по запросу: <span>{searchText}</span>
+        <p className="searchPage__card-amount">
+          {/* Результаты поиска по запросу: <span>{searchProduct}</span> */}
         </p>
-        <div className="favorites__inner">
-          <div className="favorites__products">
+        <div className="searchPage__inner">
+          <div className="searchPage__products">
             {Object.keys(data).map((id, ind) => {
-              if (ind >= collectionBegin && ind <= collectionEnd) {
-                return data[id].collectionProducts.map((item, index) => {
-                  if (item.productName.includes(searchText)) {
-                    return (
-                      <ProductComponent
-                        data={data[id].collectionProducts}
-                        id={index}
-                        collectionId={data[id].collectionId}
-                        key={item + index}
-                      />
-                    );
-                  }
-                });
-              }
+              return data[id].collectionProducts.map((item, index) => {
+                if (searchProduct === item.productName)
+                  return (
+                    <ProductComponent
+                      data={data[id].collectionProducts}
+                      id={index}
+                      collectionId={data[id].collectionId}
+                      key={item + index}
+                    />
+                  );
+              });
             })}
           </div>
           <div className="pagination">

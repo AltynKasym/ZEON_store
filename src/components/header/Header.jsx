@@ -82,7 +82,9 @@ function Header({ data }) {
   const [openChat, setOpenChat] = useState(false);
 
   const [searchText, setSearchText] = useContext(Context);
+  const [searchProduct, setSearchProduct] = useState(Context);
   let text;
+
   function searchInfo() {
     setSearchText(text);
   }
@@ -115,6 +117,14 @@ function Header({ data }) {
   }
 
   let collectionId = window.location.href.split("/")[5];
+
+  let products = new Set();
+  let productsList = [];
+
+  const [closeSearch, setCloseSearch] = useState(false);
+  useEffect(() => {
+    setCloseSearch(false);
+  }, [searchText]);
 
   return (
     <header className="header">
@@ -195,15 +205,17 @@ function Header({ data }) {
               <input
                 type="text"
                 placeholder="Поиск"
+                // value={closeSearch ? searchProduct : ""}
                 onChange={(e) => {
-                  text = e.target.value.trim();
+                  setSearchText(e.target.value.trim());
                 }}
               />
-              <span
-                className="header__bottom-search-icon"
-                onClick={searchInfo}
-              />
-
+              <Link to={`/search/`} style={{ display: "inline-block" }}>
+                <span
+                  className="header__bottom-search-icon"
+                  onClick={searchInfo}
+                />
+              </Link>
               <span />
             </div>
             <div
@@ -231,11 +243,36 @@ function Header({ data }) {
           </div>
         </div>
       </div>
-      {/* return data[id].collectionProducts.map((item, index) => {
-              if (item.newProduct) {
-                return (
-                 
-                ); */}
+
+      <ul className="searchPage__searchList">
+        {Object.keys(data).map((id, ind) => {
+          return data[id].collectionProducts.map((item, index) => {
+            products.add(item.productName);
+            productsList = [...products];
+          });
+        })}
+        {productsList.map((productName) => {
+          if (productName.toLowerCase().includes(searchText.toLowerCase()))
+            return (
+              <Link to="/search">
+                <li
+                  style={
+                    closeSearch ? { display: "none" } : { display: "block" }
+                  }
+                  className="searchPage__searchText"
+                  onClick={(e) => {
+                    setSearchProduct(e.target.innerText);
+                    setCloseSearch(true);
+                  }}
+                  key={productName}
+                >
+                  {console.log(searchProduct, "searchproduct")}
+                  {productName}
+                </li>
+              </Link>
+            );
+        })}
+      </ul>
 
       <div className="header__breadcrumb">
         {Object.keys(data).map((id, ind) => {
@@ -276,13 +313,13 @@ function Header({ data }) {
           ></span>
         </div>
       </div>
+
       <div
         className="header__window"
         style={openChat ? { display: "block" } : { display: "none" }}
       >
         <ModalWindow />
       </div>
-      
     </header>
   );
 }

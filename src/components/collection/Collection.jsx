@@ -32,6 +32,7 @@ function Collection({ data }) {
   const [collectionEnd, setCollectionEnd] = useState(perPage - 1);
 
   const handleChange = function (event, value) {
+    window.scrollTo(0, 0);
     setPage(value);
     setCollectionBegin(value * perPage - perPage);
     setCollectionEnd(value * perPage - 1);

@@ -1,5 +1,50 @@
 .App {
   text-align: left;
+
+  .pagination {
+    padding: 16px 0 39px;
+    display: flex;
+    justify-content: end;
+
+    li button {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 0%;
+      background: #ffffff;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      color: #979797;
+
+      &:hover {
+        background: #1d1d1b;
+        color: #ffffff;
+      }
+    }
+
+    .Mui-selected {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 0%;
+      background: #1d1d1b;
+      color: #ffffff;
+    }
+
+    .MuiPaginationItem-previousNext svg {
+      transform: scale(1.5);
+      fill: #1d1d1b;
+    }
+    .MuiPaginationItem-Next {
+      background: url("../src/components/img/close.png") no-repeat center;
+
+      svg {
+        display: none;
+      }
+    }
+  }
 }
 
 .App-logo {
@@ -35,4 +80,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+a {
+  text-decoration: none;
 }

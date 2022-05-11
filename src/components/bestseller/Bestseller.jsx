@@ -29,11 +29,10 @@ function Bestseller({ data }) {
   return (
     <div className="bestseller">
       <div className="bestseller__inner">
-        {Object.keys(data)
-        .map((id, ind) => {
+        {Object.keys(data).map((id, ind) => {
           if (id > 0 && id <= 8) {
             return data[id].collectionProducts.map((item, index) => {
-              if (item.newProduct) {
+              if (item.bestseller) {
                 return (
                   <div className="bestseller__product">
                     <ProductComponent

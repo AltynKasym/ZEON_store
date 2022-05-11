@@ -38,12 +38,12 @@ function MainSlider() {
             display: "none",
           },
           // pagingDotsStyle: {
-          //   // fill: "#fff",
-          //   // border: "1px solid gray",
-          //   // borderRadius: "100%",
-          //   // width: "5px",
-          //   // height: "5px",
-          //   // margin: "3px",
+          //   fill: "#fff",
+          //   border: "1px solid gray",
+          //   borderRadius: "100%",
+          //   width: "2px",
+          //   height: "5px",
+          //   margin: "3px",
           // },
           // pagingDotsClassName: "mainSlider__pagingDots",
         }}
