@@ -95,13 +95,13 @@ function ProductComponent({ data, id, collectionId }) {
         {isShown && (
           <div className="productComponent__card-showAllPhotos">
             {typeof data[id].productImg !== "string" ? (
-              data[id].productImg.map((img) => {
+              data[id].productImg.map((img, ind) => {
                 return (
                   <img
                     className="productComponent__card-photo"
                     src={img}
                     alt={img}
-                    key={img}
+                    key={ind}
                   />
                 );
               })

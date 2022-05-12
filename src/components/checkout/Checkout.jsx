@@ -25,7 +25,7 @@ function Checkout() {
   const { firstName, lastName, email, phone, country, city } = state;
 
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     if (id) {

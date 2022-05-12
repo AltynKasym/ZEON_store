@@ -53,6 +53,7 @@ function Collection({ data }) {
                       src={data[id].collectionImg}
                       alt={data[id].collectionTitle}
                       data_id={data[id].collectionId}
+                      onCLick={() => window.scrollTo(0, 0)}
                     />
                   </Link>
                   <p className="collection__card-text">
@@ -60,7 +61,12 @@ function Collection({ data }) {
                   </p>
 
                   <Link to={`${data[id].collectionId}`}>
-                    <div className="collection__card-link">Смотреть все</div>
+                    <div
+                      className="collection__card-link"
+                      onCLick={() => window.scrollTo(0, 0)}
+                    >
+                      Смотреть все
+                    </div>
                   </Link>
                   <Routes>
                     <Route

@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Collection, NewProduct, ProductComponent } from "../Components";
+import {
+  Collection,
+  NewProduct,
+  ProductComponent,
+  RandomProducts,
+} from "../Components";
 import { Context } from "../context";
 import { getDatabase, child, get, ref } from "firebase/database";
 import { app } from "../Database";
@@ -26,19 +31,13 @@ function SearchPage({ data }) {
   //     });
   // }, []);
 
-  // let link = window.location.href.split("/");
-  // let searchTxt = link[link.length - 1];
-  // console.log(searchTxt);
+  const [searchText, setSearchText, searchProduct, setSearchProduct] =
+    useContext(Context);
 
-  const [searchText, setSearchText] = useContext(Context);
-  const [searchProduct, setSearchProduct] = useState(Context);
-
-  console.log(searchProduct, "searchProd from SearchPage");
-
+  const perPage = 8;
   const [page, setPage] = useState(1);
   const [collectionBegin, setCollectionBegin] = useState(0);
-  const [collectionEnd, setCollectionEnd] = useState(3);
-  const perPage = 4;
+  const [collectionEnd, setCollectionEnd] = useState(perPage - 1);
 
   const handleChange = function (event, value) {
     setPage(value);
@@ -47,35 +46,45 @@ function SearchPage({ data }) {
   };
 
   let products = new Set();
-  let productsList = [];
+  let productsAmount = [];
 
   // const [searchProduct, setSearchProduct] = useState("");
 
   return (
     <div className="searchPage">
       <div className="container">
-        <p className="searchPage__card-amount">
-          {/* Результаты поиска по запросу: <span>{searchProduct}</span> */}
-        </p>
+        {
+          <h2 className="searchPage__card-amount">
+            Результаты поиска по запросу:{" "}
+            {typeof searchText !== "undefined" ? (
+              <span>{searchText}</span>
+            ) : (
+              <span>{searchProduct}</span>
+            )}
+          </h2>
+        }
+
         <div className="searchPage__inner">
           <div className="searchPage__products">
             {Object.keys(data).map((id, ind) => {
               return data[id].collectionProducts.map((item, index) => {
-                if (searchProduct === item.productName)
+                if (searchProduct === item.productName) {
+                  productsAmount.push(item);
                   return (
                     <ProductComponent
                       data={data[id].collectionProducts}
                       id={index}
                       collectionId={data[id].collectionId}
-                      key={item + index}
+                      key={index.toString()}
                     />
                   );
+                }
               });
             })}
           </div>
           <div className="pagination">
             <Pagination
-              count={Math.round(Object.keys(data).length / perPage)}
+              count={Math.round(productsAmount.length / perPage)}
               page={page}
               variant="outlined"
               shape="rounded"
@@ -83,6 +92,7 @@ function SearchPage({ data }) {
             />
           </div>
         </div>
+        <RandomProducts data={data} />
       </div>
     </div>
   );

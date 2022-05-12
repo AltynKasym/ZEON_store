@@ -66,17 +66,18 @@ function ProductPage({ data }) {
     let basket = JSON.parse(localStorage.getItem("basket"));
     if (color !== "") {
       if (basket.length === 0) {
-        basket.push(`${collectionId}, ${productId}, ${color}`);
+        basket.push(`${collectionId}, ${productId}, ${color}, 1`);
         setColor("");
         setToBasket(true);
       } else {
-        if (basket.includes(`${collectionId}, ${productId}, ${color}`)) {
+        if (basket.includes(`${collectionId}, ${productId}, ${color}, 1`)) {
           basket.splice(
-            basket.indexOf(`${collectionId}, ${productId}, ${color}`),
+            basket.indexOf(`${collectionId}, ${productId}, ${color}, 1`),
             1
           );
+          // setToBasket(true);
         } else {
-          basket.push(`${collectionId}, ${productId}, ${color}`);
+          basket.push(`${collectionId}, ${productId}, ${color}, 1`);
           setColor("");
           setToBasket(true);
         }

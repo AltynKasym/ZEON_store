@@ -6,31 +6,71 @@ import { app } from "../Database";
 import "./basketProduct.scss";
 import Carousel from "nuka-carousel";
 import { Link } from "react-router-dom";
-// import { context } from "../context";
 
-function BasketProduct({ data, id, collectionId, color }) {
-  // window.addEventListener("load", function () {
-  //   if (basket.includes(`${collectionId}, ${id}, ${color}`)) {
-  //     // setAddFavorites(true);
-  //   } else {
-  //     // setAddFavorites(false);
-  //   }
-  // });
-  // const [color, setColor] = useState("");
-
-  const [amount, setAmount] = useState(1);
+function BasketProduct({ data, id, collectionId, color, productAmount }) {
+  const [amount, setAmount] = useState(Number(productAmount));
   const [products, setProducts] = useContext(Context);
   const [productsAmount, setProductsAmount] = useContext(Context);
 
   function deleteFromBasket() {
     let basket = JSON.parse(localStorage.getItem("basket"));
-    if (basket.includes(`${collectionId}, ${id + 1}, ${color}`)) {
-      basket.splice(basket.indexOf(`${collectionId}, ${id + 1}, ${color}`), 1);
-
-      localStorage.setItem("basket", JSON.stringify(basket));
-    } else alert("No includes");
+    basket.map((item, ind) => {
+      if (item.includes(`${collectionId}, ${id + 1}, ${color}`)) {
+        basket.splice(ind, 1);
+        localStorage.setItem("basket", JSON.stringify(basket));
+      }
+    });
   }
 
+  function setAmountProducts() {
+    let basket = JSON.parse(localStorage.getItem("basket"));
+
+    basket.map((item, ind) => {
+      if (item.includes(`${collectionId}, ${id + 1}, ${color}`)) {
+        let bas2 = item.split(",");
+        bas2.splice(3, 1, amount);
+        basket.splice(ind, 1, bas2.join());
+      }
+    });
+    localStorage.setItem("basket", JSON.stringify(basket));
+  }
+
+  // function addToBasket() {
+  //   let basket = JSON.parse(localStorage.getItem("basket"));
+  //   if (color !== "") {
+  //     if (basket.length === 0) {
+  //       basket.push(`${collectionId}, ${productId}, ${color}, 1`);
+  //       setColor("");
+  //       setToBasket(true);
+  //     } else {
+  //       if (basket.includes(`${collectionId}, ${productId}, ${color}, 1`)) {
+  //         basket.splice(
+  //           basket.indexOf(`${collectionId}, ${productId}, ${color}, 1`),
+  //           1
+  //         );
+  //         // setToBasket(true);
+  //       } else {
+  //         basket.push(`${collectionId}, ${productId}, ${color}, 1`);
+  //         setColor("");
+  //         setToBasket(true);
+  //       }
+  //     }
+
+  //     localStorage.setItem("basket", JSON.stringify(basket));
+  //   } else alert("Выберите цвет");
+  // }
+
+  function decrementAmount() {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    }
+    setAmountProducts();
+  }
+
+  function incrementAmount() {
+    setAmount(amount + 1);
+    setAmountProducts();
+  }
   return (
     <div className="basketProduct">
       <div className="basketProduct__card">
@@ -73,22 +113,14 @@ function BasketProduct({ data, id, collectionId, color }) {
           <div className="basketProduct__amount">
             <button
               className="basketProduct__button basketProduct__amount-decrement"
-              onClick={() => {
-                if (amount > 1) {
-                  setAmount(amount - 1);
-                  setProducts(amount - 1);
-                }
-              }}
+              onClick={decrementAmount}
             >
               -
             </button>
             <span className="basketProduct__amount-product">{amount}</span>
             <button
               className="basketProduct__button basketProduct__amount-increment"
-              onClick={() => {
-                setAmount(amount + 1);
-                setProducts(amount + 1);
-              }}
+              onClick={incrementAmount}
             >
               +
             </button>

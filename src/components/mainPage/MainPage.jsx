@@ -4,6 +4,7 @@ import {
   MainSlider,
   NewProduct,
   Bestseller,
+  Privilege,
 } from "../Components";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 
@@ -19,6 +20,9 @@ function MainPage({ data }) {
     setCollectionEnd(collectionEnd + perPage);
   };
 
+  function goUp() {
+    window.scrollTo(0, 0);
+  }
   return (
     <div className="mainPage">
       <div className="container">
@@ -42,20 +46,23 @@ function MainPage({ data }) {
 
                 return (
                   <div className="collection__card" key={index + id}>
-                    <Link to={`${data[id].collectionId}`}>
+                    <Link to={`collections/${data[id].collectionId}`}>
                       <img
                         className="collection__card-photo"
                         src={data[id].collectionImg}
                         alt={data[id].collectionTitle}
                         data_id={data[id].collectionId}
+                        onCLick={goUp}
                       />
                     </Link>
                     <p className="collection__card-text">
                       {data[id].collectionTitle}
                     </p>
 
-                    <Link to={`${data[id].collectionId}`}>
-                      <div className="collection__card-link">Смотреть все</div>
+                    <Link to={`collections/${data[id].collectionId}`}>
+                      <div className="collection__card-link" onCLick={goUp}>
+                        Смотреть все
+                      </div>
                     </Link>
                     <Routes>
                       <Route
@@ -77,7 +84,9 @@ function MainPage({ data }) {
         </div>
         <div className="mainPage__privilege">
           <h2 className="mainPage__title">Наши преимущества</h2>
-          <div className="mainPage__privilege-inner"></div>
+          <div className="mainPage__privilege-inner">
+            <Privilege />
+          </div>
         </div>
       </div>
     </div>

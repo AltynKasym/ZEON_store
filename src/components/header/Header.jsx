@@ -81,8 +81,9 @@ function Header({ data }) {
 
   const [openChat, setOpenChat] = useState(false);
 
-  const [searchText, setSearchText] = useContext(Context);
-  const [searchProduct, setSearchProduct] = useState(Context);
+  const [searchText, setSearchText, searchProduct, setSearchProduct] =
+    useContext(Context);
+  // const [searchProduct, setSearchProduct] = useContext(Context);
   let text;
 
   function searchInfo() {
@@ -196,7 +197,7 @@ function Header({ data }) {
                   className="header__bottom-logo"
                   src={item}
                   alt={name}
-                  key="item+id"
+                  key={item + name}
                 />
               ))}
             </a>
@@ -251,35 +252,40 @@ function Header({ data }) {
             productsList = [...products];
           });
         })}
-        {productsList.map((productName) => {
-          if (productName.toLowerCase().includes(searchText.toLowerCase()))
-            return (
-              <Link to="/search">
-                <li
-                  style={
-                    closeSearch ? { display: "none" } : { display: "block" }
-                  }
-                  className="searchPage__searchText"
-                  onClick={(e) => {
-                    setSearchProduct(e.target.innerText);
-                    setCloseSearch(true);
-                  }}
-                  key={productName}
-                >
-                  {console.log(searchProduct, "searchproduct")}
-                  {productName}
-                </li>
-              </Link>
-            );
+        {productsList.map((productName, ind) => {
+          if (typeof searchText == "string") {
+            if (productName.toLowerCase().includes(searchText.toLowerCase()))
+              return (
+                <Link to="/search">
+                  <li
+                    style={
+                      closeSearch ? { display: "none" } : { display: "block" }
+                    }
+                    className="searchPage__searchText"
+                    onClick={(e) => {
+                      setSearchProduct(e.target.innerText);
+                      setCloseSearch(true);
+                    }}
+                    key={productName + ind}
+                  >
+                    {productName}
+                  </li>
+                </Link>
+              );
+          }
         })}
       </ul>
 
       <div className="header__breadcrumb">
-        {Object.keys(data).map((id, ind) => {
-          if (id == collectionId - 1) {
-            return <span key={id + ind}>{data[id].collectionTitle}</span>;
-          }
-        })}
+        <div className="container">
+          {" "}
+          <Link to="/zeon_store">Главная</Link>
+          {Object.keys(data).map((id, ind) => {
+            if (id == collectionId - 1) {
+              return <span key={id + ind}>{data[id].collectionTitle}</span>;
+            }
+          })}
+        </div>
       </div>
 
       <div className="header__connection">
