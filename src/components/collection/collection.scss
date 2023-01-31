@@ -1,0 +1,109 @@
+@import "../var";
+
+.collection {
+  background-color: $main-bgc;
+  margin-bottom: 30px;
+
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: $primary-text;
+    padding: 32px 0 18px;
+  }
+
+  &__inner {
+    display: grid;
+    // grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__card {
+    &-photo {
+    }
+    &-text {
+      position: relative;
+      top: -40px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: -25px;
+    }
+
+    &-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $footer-bgc;
+      color: #fff;
+      padding: 13px 0;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &::after {
+        content: url("../img/arrow-white.svg");
+        position: relative;
+        top: 4px;
+        left: 15px;
+      }
+
+      &:hover {
+        background-color: #fff;
+        color: $footer-bgc;
+        transition: all 0.2s;
+
+        &::after {
+          content: url("../img/arrow-black.svg");
+          position: relative;
+          top: 4px;
+          left: 15px;
+        }
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .pagination {
+    padding: 16px 0 39px;
+    display: flex;
+    justify-content: end;
+
+    li button {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 0%;
+      background: #ffffff;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      color: #979797;
+
+      &:hover {
+        background: #1d1d1b;
+        color: #ffffff;
+      }
+    }
+
+    .Mui-selected {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 0%;
+      background: #1d1d1b;
+      color: #ffffff;
+    }
+
+    .MuiPaginationItem-previousNext svg {
+      transform: scale(1.5);
+      fill: #1d1d1b;
+    }
+  }
+}
+
+

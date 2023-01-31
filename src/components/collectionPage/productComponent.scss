@@ -1,0 +1,187 @@
+@import "../var";
+
+.productComponent {
+    display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    wrap: wrap;
+    gap: 8px;
+    &__title {
+    }
+    //   &__inner {
+    //     display: grid;
+    //     grid-template-columns: repeat(4, 1fr);
+    //     wrap: wrap;
+    //     gap: 8px;
+    //   }
+
+    &__img {
+        position: relative;
+    }
+
+    &__card {
+        position: relative;
+
+        &-showAllPhotos {
+            position: absolute;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            flex-wrap: wrap;
+            width: 500px;
+            gap: 5px;
+            z-index: 999;
+            border: 1px solid #1d1d1b;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        &-favoriteRemove {
+            position: absolute;
+            top: 10px;
+            right: 11px;
+            width: 24px;
+            height: 22px;
+            background-image: url("../img/fav1.png");
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.2s;
+            }
+        }
+
+        &-favoriteAdd {
+            position: absolute;
+            top: 10px;
+            right: 11px;
+            width: 24px;
+            height: 22px;
+            background-image: url("../img/fav2.png");
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.2s;
+            }
+        }
+
+        // &:hover::after {
+        //   content: url("../img/fav2.png");
+        //   display: block;
+        //   position: absolute;
+        //   right: 10px;
+        //   top: 10px;
+        // }
+
+        &-name {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $primary-text;
+            padding-top: 6px;
+        }
+
+        &-price {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            // color: $primary-text;
+            color: #1d1d1b;
+            padding-top: 6px;
+            padding-left: 6px;
+            display: inline-block;
+        }
+
+        &-oldPrice {
+            text-decoration: line-through;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            color: #979797;
+            display: inline-block;
+        }
+
+        &-percent {
+            position: absolute;
+            display: inline-flex;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background-image: url("../img/Rectangle.png");
+            background-position: left;
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            span {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 15px;
+                text-align: center;
+                text-transform: uppercase;
+                color: #ffffff;
+                transform: rotate(-45deg) translateX(40%) translateY(30%);
+                display: inline;
+            }
+        }
+
+        &-size {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            color: #7c7c7c;
+            padding-top: 6px;
+        }
+
+        &-colors {
+            width: 100px;
+            display: flex;
+            // justify-content: space-between;
+            width: 200px;
+            padding: 10px 0;
+
+            span + span {
+                margin-left: 10px;
+            }
+            span {
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                padding: 2px;
+
+                &:nth-child(6) {
+                    outline: 1px solid lightgray;
+                }
+            }
+        }
+
+        .slider-control-bottomcenter {
+            display: none;
+            bottom: 5px !important;
+            fill: #fff !important;
+
+            // .paging-item {
+            // }
+
+            // .paging-dot {
+            //   fill: white;
+            //   border: 1px solid rgba(29, 29, 27, 0.3);
+            //   border-radius: 50%;
+            //   width: 8px;
+            //   height: 8px;
+            // }
+
+            // .active {
+            //   .paging-dot {
+            //     fill: #1d1d1b;
+            //     border: 1px solid #1d1d1b;
+            //     border-radius: 50%;
+            //     width: 8px;
+            //     height: 8px;
+            //   }
+            // }
+        }
+    }
+    .slider-control-centerright {
+        button {
+            width: 100px !important;
+            height: 30px !important;
+        }
+    }
+}

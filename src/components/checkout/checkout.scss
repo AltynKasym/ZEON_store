@@ -1,0 +1,177 @@
+.background {
+  background-color: rgba(198, 198, 198, 0.5);
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.checkout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  background-color: #fff;
+  width: 436px;
+  z-index: 998;
+  transform: translate(-50%, -50%);
+
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #393939;
+    padding-bottom: 24px;
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    color: #393939;
+  }
+
+  &__input {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    height: 44px;
+    width: 100%;
+    padding-left: 15px;
+    border: 1px solid #dbdbd9;
+    margin-bottom: 10px;
+
+    &:focus {
+      // border: none;
+      outline: none;
+    }
+
+    &::selection {
+      background-color: #fff;
+    }
+
+    &-text {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      margin-bottom: 12px;
+      padding-top: 10px;
+      color: #808080;
+    }
+
+    &-checkbox {
+      width: 20px;
+      height: 20px;
+    }
+    &-boxcheckbox {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 30px;
+    }
+
+    &-checkboxText {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+      padding-left: 10px;
+      color: #393939;
+    }
+  }
+  &-send {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    background: #777776;
+    color: #ffffff;
+    padding: 14px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  div {
+    position: relative;
+  }
+  &-person {
+    position: absolute;
+    top: 23px;
+    left: 15px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/person.png") no-repeat center;
+  }
+  &-phone {
+    position: absolute;
+    top: 91px;
+    left: 15px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/phone.png") no-repeat center;
+  }
+
+  &-close {
+    position: absolute;
+    top: 35px;
+    right: 15px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/close.png") no-repeat center;
+  }
+
+  &__sent {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 328px;
+    padding: 28px 24px;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    &-img {
+      background: url("../img/check.png") no-repeat center;
+      width: 70px;
+      height: 70px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    &-title {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 100%;
+      color: #393939;
+      text-align: center;
+      padding: 14px 0 8px;
+    }
+
+    &-text {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 150%;
+      text-align: center;
+      color: #393939;
+      padding-bottom: 16px;
+    }
+    &-button {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      background: #1d1d1b;
+      color: #ffffff;
+      padding: 14px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+  }
+}

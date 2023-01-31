@@ -1,0 +1,73 @@
+@import "../var";
+.mainPage {
+  background-color: $main-bgc;
+
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #393939;
+    padding: 44px 0 18px;
+  }
+
+  &__button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #ffffff;
+    background: #1d1d1b;
+    padding: 8px 39px;
+    margin: 16px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__privilege {
+    padding-bottom: 64px;
+  }
+}
+
+.mainSlider {
+  padding: 11px 0 15px;
+  img {
+    // transform: scale(3);
+    height: 100%;
+  }
+
+  //   &__pagingDots {
+  //     fill: "#fff";
+  //     outline: "1px solid gray";
+  //     border-radius: "50%";
+  //     width: "2px";
+  //     height: "5px";
+  //     margin: "8px";
+  //   }
+
+  .slider-control-bottomcenter {
+    bottom: -35px !important;
+    fill: #fff !important;
+
+    .paging-item {
+    }
+
+    .paging-dot {
+      fill: white;
+      border: 1px solid rgba(29, 29, 27, 0.3);
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+    }
+
+    .active {
+      .paging-dot {
+        fill: #1d1d1b;
+        border: 1px solid #1d1d1b;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+}

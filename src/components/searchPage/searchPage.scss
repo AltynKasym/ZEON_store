@@ -1,0 +1,64 @@
+@import "../var";
+
+.searchPage {
+  background-color: $main-bgc;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    wrap: wrap;
+    gap: 8px;
+  }
+
+  &__searchList {
+    list-style: none;
+    position: absolute;
+    top: 135px;
+    left: 245px;
+    width: 710px;
+    z-index: 5;
+    // padding-left: 20px;
+
+    li {
+      padding: 5px 20px;
+      background-color: #fff;
+      z-index: 99;
+      cursor: pointer;
+    }
+  }
+
+  &__card {
+    position: relative;
+
+    &::after {
+      content: url("../img/fav2.png");
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 4px;
+      transform: scale(0.6);
+    }
+
+    &-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 29px;
+      color: $primary-text;
+      padding: 11px 0;
+    }
+
+    &-amount {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 29px;
+      color: #393939;
+      padding: 11px 0 16px;
+    }
+  }
+}
