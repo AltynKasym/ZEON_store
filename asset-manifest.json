@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/zeon_store/static/css/main.7c08a5e4.css",
-    "main.js": "/zeon_store/static/js/main.fc855339.js",
+    "main.js": "/zeon_store/static/js/main.2e6ea0bc.js",
     "static/js/787.0ac5ae94.chunk.js": "/zeon_store/static/js/787.0ac5ae94.chunk.js",
     "static/media/help.png": "/zeon_store/static/media/help.a975eeae39b00b448aed.png",
     "static/media/mail.svg": "/zeon_store/static/media/mail.e8c1392f0a0ed1f810af.svg",
@@ -13,11 +13,11 @@
     "static/media/arrow-black.svg": "/zeon_store/static/media/arrow-black.b781fa2cbdb58ef4f06e.svg",
     "static/media/arrow-white.svg": "/zeon_store/static/media/arrow-white.0bd762ef3aaa3ea55630.svg",
     "main.7c08a5e4.css.map": "/zeon_store/static/css/main.7c08a5e4.css.map",
-    "main.fc855339.js.map": "/zeon_store/static/js/main.fc855339.js.map",
+    "main.2e6ea0bc.js.map": "/zeon_store/static/js/main.2e6ea0bc.js.map",
     "787.0ac5ae94.chunk.js.map": "/zeon_store/static/js/787.0ac5ae94.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7c08a5e4.css",
-    "static/js/main.fc855339.js"
+    "static/js/main.2e6ea0bc.js"
   ]
 }
